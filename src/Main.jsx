@@ -1,34 +1,30 @@
 import { useState } from "react";
 import styled from "styled-components";
-import GlobalStyles from "./style/GlobalStyle";
 import Header from "./components/Header";
 import Tab from "./components/Tab";
 import Home from "./pages/Home";
 import News from "./pages/News";
 import Players from "./pages/Players";
 
-function App() {
+function Main() {
   const [tabIndex, setTabIndex] = useState(0);
 
   return (
-    <>
-      <GlobalStyles />
-      <MainLayout>
-        <MainContainer>
-          <Header />
-          <Tab tabIndex={tabIndex} setTabIndex={setTabIndex} />
-          <TabContentsWrapper>
-            {tabIndex === 0 && <Home />}
-            {tabIndex === 1 && <News />}
-            {tabIndex === 2 && <Players />}
-          </TabContentsWrapper>
-        </MainContainer>
-      </MainLayout>
-    </>
+    <MainLayout>
+      <MainContainer>
+        <Header />
+        <Tab tabIndex={tabIndex} setTabIndex={setTabIndex} />
+        <TabContentsWrapper>
+          {tabIndex === 0 && <Home />}
+          {tabIndex === 1 && <News />}
+          {tabIndex === 2 && <Players />}
+        </TabContentsWrapper>
+      </MainContainer>
+    </MainLayout>
   );
 }
 
-export default App;
+export default Main;
 
 const MainLayout = styled.div`
   width: 100%;
