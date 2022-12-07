@@ -5,16 +5,16 @@ function ProfileInfo() {
   return (
     <Wrapper>
       <FormContainer>
-        <label for="name">이름</label>
+        <label htmlFor="name">이름</label>
         <input type="text" id="name" name="name" />
 
-        <label for="email">이메일</label>
+        <label htmlFor="email">이메일</label>
         <input type="email" id="email" name="email" />
 
-        <label for="phone">휴대폰 번호</label>
+        <label htmlFor="phone">휴대폰 번호</label>
         <input type="text" id="phone" name="phone" />
 
-        <label for="msg">하고 싶은 말</label>
+        <label htmlFor="msg">하고 싶은 말</label>
         <input type="text" id="msg" name="msg" />
 
         <button type="submit">제출</button>
