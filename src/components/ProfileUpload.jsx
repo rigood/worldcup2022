@@ -5,10 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 import Button from "../components/Button";
 import { ReactComponent as ProfileIcon } from "../svg/profile.svg";
+import useLocalStorage from "../hook/useLocalStorage";
 
 function ProfileUpload() {
   const [active, setActive] = useState(false);
-  const [imgUrl, setImgUrl] = useState("");
+  const [imgUrl, setImgUrl] = useLocalStorage("imgUrl", "");
 
   const inputRef = useRef(null);
 
