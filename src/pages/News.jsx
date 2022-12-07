@@ -4,38 +4,28 @@ import color from "../style/color";
 import maxLines from "../style/maxLines";
 import Button from "../components/Button";
 import { ReactComponent as FilterIcon } from "../svg/filter.svg";
+import useFetch from "../hook/useFetch";
 
 function formatDate(str) {
   return str.substr(0, 10);
 }
 
-const URL =
+const BASE_URL =
   "https://newsapi.org/v2/top-headlines?country=kr&category=sports&pageSize=100";
 const API_KEY = "fdeb9675014a4e569ae16e4a53581199";
 const DEFAULT_IMG = "https://via.placeholder.com/100x66?text=WorldCup";
 
 function News() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [articles, setArticles] = useState([]);
+  const url = `${BASE_URL}&apiKey=${API_KEY}`;
+  const [{ data, isLoading, error }, doFetch] = useFetch(url);
   const [index, setIndex] = useState(10);
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
-    async function getArticles() {
-      setIsLoading(true);
-      try {
-        const res = await fetch(`${URL}&apiKey=${API_KEY}`);
-        const data = await res.json();
-        setArticles(data.articles);
-      } catch (error) {
-        setError(error);
-        console.log(error);
-      }
-      setIsLoading(false);
-    }
-    getArticles();
-  }, []);
+    doFetch();
+  }, [doFetch]);
+
+  const articles = data?.articles;
 
   const filterList = [
     ...new Set(articles?.map((article) => article.title.split(" - ")[1])),
@@ -44,7 +34,7 @@ function News() {
   const filteredArticles =
     filter === "all"
       ? articles
-      : articles.filter((article) => {
+      : articles?.filter((article) => {
           return article.title.split(" - ")[1] === filter;
         });
 
@@ -67,7 +57,10 @@ function News() {
   if (error) {
     return (
       <Wrapper>
-        <p className="msg">에러가 발생했습니다. ({error})</p>
+        <p className="msg">
+          에러가 발생했습니다.
+          <br />({error})
+        </p>
       </Wrapper>
     );
   }
@@ -114,14 +107,7 @@ function News() {
             );
           })}
           {filteredArticles?.length === 0 && (
-            <p className="error-msg">관련 기사가 존재하지 않습니다.</p>
-          )}
-          {filteredArticles === undefined && (
-            <p className="error-msg">
-              <span>일일 트래픽 허용량 초과</span>
-              <br />
-              이용에 불편을 드려 죄송합니다.
-            </p>
+            <p className="msg">관련 기사가 존재하지 않습니다.</p>
           )}
         </ArticleList>
       }
@@ -136,6 +122,10 @@ export default News;
 
 const Wrapper = styled.div`
   text-align: center;
+  .msg {
+    white-space: pre-line;
+    line-height: 1.5;
+  }
 `;
 
 const FilterContainer = styled.label`
@@ -160,7 +150,7 @@ const ArticleList = styled.ul`
   flex-direction: column;
   margin-bottom: 20px;
 
-  .error-msg {
+  .msg {
     margin-top: 20px;
     white-space: pre-line;
     line-height: 1.5;
