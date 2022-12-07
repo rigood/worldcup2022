@@ -65,6 +65,7 @@ const ProfileInfo = styled.div`
   .name {
     font-size: 32px;
     font-weight: 700;
+    color: ${color.primary};
     margin-bottom: 8px;
   }
 `;
@@ -93,7 +94,7 @@ const InfoGrid = styled.div`
   column-gap: 10px;
   row-gap: 10px;
   label {
-    color: ${color.primary};
+    color: ${color.blue};
   }
   user-select: none;
 `;

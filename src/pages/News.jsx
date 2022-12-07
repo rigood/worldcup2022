@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import Button from "../components/Button";
 import color from "../style/color";
 import maxLines from "../style/maxLines";
+import Button from "../components/Button";
 import { ReactComponent as FilterIcon } from "../svg/filter.svg";
 
 function formatDate(str) {
@@ -57,16 +57,24 @@ function News() {
   };
 
   if (isLoading) {
-    return <Wrapper>Loading</Wrapper>;
+    return (
+      <Wrapper>
+        <p className="msg">Loading</p>
+      </Wrapper>
+    );
   }
 
   if (error) {
-    return <Wrapper>에러가 발생했습니다. ({error})</Wrapper>;
+    return (
+      <Wrapper>
+        <p className="msg">에러가 발생했습니다. ({error})</p>
+      </Wrapper>
+    );
   }
 
   return (
     <Wrapper>
-      <FilterSourceList>
+      <FilterContainer>
         <FilterIcon />
         <FilterSelect onChange={handleFilterSource}>
           <option value="all">언론사 전체</option>
@@ -78,7 +86,7 @@ function News() {
             );
           })}
         </FilterSelect>
-      </FilterSourceList>
+      </FilterContainer>
       {
         <ArticleList>
           {filteredArticles?.slice(0, index).map((article, index) => {
@@ -127,14 +135,12 @@ function News() {
 export default News;
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: center;
 `;
 
-const FilterSourceList = styled.label`
+const FilterContainer = styled.label`
   display: flex;
-  align-self: flex-start;
+  align-items: center;
   margin-bottom: 10px;
 `;
 
@@ -143,6 +149,7 @@ const FilterSelect = styled.select`
   width: 100px;
   font-size: 15px;
   color: ${color.primary};
+
   option {
     color: black;
   }
@@ -152,6 +159,7 @@ const ArticleList = styled.ul`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+
   .error-msg {
     margin-top: 20px;
     white-space: pre-line;
@@ -159,7 +167,7 @@ const ArticleList = styled.ul`
     text-align: center;
     span {
       font-weight: 700;
-      color: ${color.primary};
+      color: ${color.blue};
     }
   }
 `;
@@ -168,6 +176,8 @@ const ArticleItem = styled.li`
   padding: 15px 0;
   display: grid;
   grid-template-columns: 3fr 7fr;
+  text-align: start;
+
   .leftCol {
     img {
       width: 100px;
@@ -176,12 +186,14 @@ const ArticleItem = styled.li`
       border-radius: 10px;
     }
   }
+
   .rightCol {
     .headline {
       ${maxLines(2)}
       font-size: 15px;
       margin-bottom: 5px;
     }
+
     .info {
       font-size: 13px;
       color: ${color.gray};

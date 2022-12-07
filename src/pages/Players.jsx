@@ -1,10 +1,10 @@
 import { useState, useRef } from "react";
 import styled from "styled-components";
-import useDragSlider from "../hook/useDragSlider";
-import PlayerItem from "../components/PlayerItem";
-import { KOREA_PLAYERS } from "../data/korea-players";
-import { ReactComponent as PlayerIcon } from "../svg/player.svg";
 import color from "../style/color";
+import useDragSlider from "../hook/useDragSlider";
+import { KOREA_PLAYERS } from "../data/korea-players";
+import PlayerItem from "../components/PlayerItem";
+import { ReactComponent as PlayerIcon } from "../svg/player.svg";
 
 function Players() {
   const [index, setIndex] = useState(0);
@@ -34,9 +34,7 @@ function Players() {
 
 export default Players;
 
-const Wrapper = styled.div`
-  width: 100%;
-`;
+const Wrapper = styled.div``;
 
 const TitleContainer = styled.div`
   display: flex;
