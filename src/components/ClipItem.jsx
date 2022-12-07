@@ -4,7 +4,7 @@ import { formatDate, formatSeconds } from "../utils/format";
 function ClipItem({ video }, ref) {
   const { author, datetime, play_time, thumbnail, title, url } = video;
   return (
-    <li ref={ref}>
+    <li>
       <img src={thumbnail} style={{ width: "100px", height: "66px" }} />
       <div>
         <a href={url} target="_blank">
@@ -13,7 +13,7 @@ function ClipItem({ video }, ref) {
       </div>
       <div>{formatSeconds(play_time)}</div>
       <div>{author}</div>
-      <div>{formatDate(datetime)}</div>
+      <div ref={ref}>{formatDate(datetime)}</div>
     </li>
   );
 }
