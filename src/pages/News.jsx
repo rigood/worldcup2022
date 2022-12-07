@@ -1,19 +1,15 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import color from "../style/color";
-import maxLines from "../style/maxLines";
 import Button from "../components/Button";
 import { ReactComponent as FilterIcon } from "../svg/filter.svg";
 import useFetch from "../hook/useFetch";
-
-function formatDate(str) {
-  return str.substr(0, 10);
-}
+import ArticleItem from "../components/ArticleItem";
+import NewsSkeleton from "../components/NewsSkeleton";
 
 const BASE_URL =
   "https://newsapi.org/v2/top-headlines?country=kr&category=sports&pageSize=100";
 const API_KEY = "fdeb9675014a4e569ae16e4a53581199";
-const DEFAULT_IMG = "https://via.placeholder.com/100x66?text=WorldCup";
 
 function News() {
   const url = `${BASE_URL}&apiKey=${API_KEY}`;
@@ -46,14 +42,6 @@ function News() {
     setIndex((prev) => prev + 10);
   };
 
-  if (isLoading) {
-    return (
-      <Wrapper>
-        <p className="msg">Loading</p>
-      </Wrapper>
-    );
-  }
-
   if (error) {
     return (
       <Wrapper>
@@ -82,30 +70,13 @@ function News() {
       </FilterContainer>
       {
         <ArticleList>
-          {filteredArticles?.slice(0, index).map((article, index) => {
-            const { title, publishedAt, url, urlToImage } = article;
-            const headline = title?.split(" - ")[0];
-            const source = title?.split(" - ")[1];
-            return (
-              <ArticleItem key={index}>
-                <div className="leftCol">
-                  <a href={url} target="_blank">
-                    <img src={urlToImage || DEFAULT_IMG} />
-                  </a>
-                </div>
-                <div className="rightCol">
-                  <h2 className="headline">
-                    <a href={url} target="_blank">
-                      {headline}
-                    </a>
-                  </h2>
-                  <p className="info">
-                    {source}ㆍ{formatDate(publishedAt)}
-                  </p>
-                </div>
-              </ArticleItem>
-            );
-          })}
+          {filteredArticles &&
+            filteredArticles.slice(0, index).map((article, index) => {
+              return <ArticleItem key={index} article={article} />;
+            })}
+
+          {isLoading && <NewsSkeleton count={10} />}
+
           {filteredArticles?.length === 0 && (
             <p className="msg">관련 기사가 존재하지 않습니다.</p>
           )}
@@ -158,36 +129,6 @@ const ArticleList = styled.ul`
     span {
       font-weight: 700;
       color: ${color.blue};
-    }
-  }
-`;
-
-const ArticleItem = styled.li`
-  padding: 15px 0;
-  display: grid;
-  grid-template-columns: 3fr 7fr;
-  text-align: start;
-
-  .leftCol {
-    img {
-      width: 100px;
-      height: 66px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-  }
-
-  .rightCol {
-    .headline {
-      ${maxLines(2)}
-      font-size: 15px;
-      margin-bottom: 5px;
-    }
-
-    .info {
-      font-size: 13px;
-      color: ${color.gray};
-      letter-spacing: -0.2px;
     }
   }
 `;
