@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import News from "./pages/News";
 import Players from "./pages/Players";
 import MY from "./pages/MY";
+import Clips from "./pages/Clips";
 
 function App() {
   const [tabIndex, setTabIndex] = useState(0);
@@ -23,6 +24,7 @@ function App() {
             {tabIndex === 1 && <News />}
             {tabIndex === 2 && <Players />}
             {tabIndex === 3 && <MY />}
+            {tabIndex === 5 && <Clips />}
           </TabContentsWrapper>
         </MainContainer>
       </MainLayout>
