@@ -1,55 +1,48 @@
-import { useEffect } from "react";
-import useFetch from "../hook/useFetch";
-import { formatDate, formatSeconds } from "../utils/format";
-
-const BASE_URL = "https://dapi.kakao.com/v2/search/vclip";
-const API_KEY = "e2c4d5c53f4e3ca42459fd92d91ac39a";
+import { useState, useRef, useCallback } from "react";
+import ClipItem from "../components/ClipItem";
+import useInfiniteVideoSearch from "../hook/useInfiniteVideoSearch";
 
 function Clips() {
-  const url = `${BASE_URL}?query=월드컵`;
-  const [{ data, isLoading, error }, doFetch] = useFetch(url);
+  const [query, setQuery] = useState("월드컵");
+  const [pageNumber, setPageNumber] = useState(1);
 
-  useEffect(() => {
-    doFetch({
-      headers: {
-        Authorization: `KakaoAK ${API_KEY}`,
-      },
-    });
-  }, [doFetch]);
+  const { videos, isLoading, error, hasMorePage } = useInfiniteVideoSearch(
+    query,
+    pageNumber
+  );
 
-  const videos = data?.documents;
+  const observer = useRef();
+  const lastVideoRef = useCallback(
+    (node) => {
+      if (isLoading) return;
 
-  if (isLoading) {
-    return <p>Loading</p>;
-  }
+      if (observer.current) observer.current.disconnect();
 
-  if (error) {
-    return (
-      <p>
-        에러가 발생하였습니다. <br /> ({error})
-      </p>
-    );
-  }
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMorePage) {
+          setPageNumber((prev) => prev + 1);
+        }
+      });
+
+      if (node) observer.current.observe(node);
+    },
+    [isLoading, hasMorePage]
+  );
 
   return (
-    <ul>
-      {videos?.map((video, index) => {
-        const { author, datetime, play_time, thumbnail, title, url } = video;
-        return (
-          <li key={index}>
-            <img src={thumbnail} style={{ width: "100px", height: "66px" }} />
-            <div>
-              <a href={url} target="_blank">
-                {title}
-              </a>
-            </div>
-            <div>{formatSeconds(play_time)}</div>
-            <div>{author}</div>
-            <div>{formatDate(datetime)}</div>
-          </li>
-        );
-      })}
-    </ul>
+    <>
+      <ul>
+        {videos.map((video, index) => {
+          if (videos.length === index + 1) {
+            return <ClipItem ref={lastVideoRef} key={index} video={video} />;
+          } else {
+            return <ClipItem key={index} video={video} />;
+          }
+        })}
+      </ul>
+      <div>{isLoading && "Loading"}</div>
+      <div>{error && "Error"}</div>
+    </>
   );
 }
 
