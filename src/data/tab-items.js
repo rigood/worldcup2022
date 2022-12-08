@@ -1,11 +1,10 @@
 export const TAB_ITEMS = [
   "Home",
-  "News",
-  "Players",
-  "MY",
   "Matches",
+  "Players",
   "Clips",
-  "Prediction",
+  "Photos",
+  "MY",
   "Store",
-  "FIFA",
+  "News",
 ];

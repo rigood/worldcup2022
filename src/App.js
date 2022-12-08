@@ -4,10 +4,11 @@ import GlobalStyles from "./style/GlobalStyle";
 import Header from "./components/Header";
 import Tab from "./components/Tab";
 import Home from "./pages/Home";
-import News from "./pages/News";
 import Players from "./pages/Players";
-import MY from "./pages/MY";
 import Clips from "./pages/Clips";
+import Photos from "./pages/Photos";
+import MY from "./pages/MY";
+import News from "./pages/News";
 
 function App() {
   const [tabIndex, setTabIndex] = useState(0);
@@ -21,10 +22,13 @@ function App() {
           <Tab tabIndex={tabIndex} setTabIndex={setTabIndex} />
           <TabContentsWrapper>
             {tabIndex === 0 && <Home />}
-            {tabIndex === 1 && <News />}
+            {/* {tabIndex === 1 && <Matches />} */}
             {tabIndex === 2 && <Players />}
-            {tabIndex === 3 && <MY />}
-            {tabIndex === 5 && <Clips />}
+            {tabIndex === 3 && <Clips />}
+            {tabIndex === 4 && <Photos />}
+            {tabIndex === 5 && <MY />}
+            {/* {tabIndex === 6 && <Store />} */}
+            {tabIndex === 7 && <News />}
           </TabContentsWrapper>
         </MainContainer>
       </MainLayout>
