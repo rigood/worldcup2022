@@ -1,14 +1,14 @@
 import { useState, useRef, useCallback } from "react";
-import ClipItem from "../components/ClipItem";
 import useInfiniteVideoSearch from "../hook/useInfiniteVideoSearch";
+import ClipItem from "../components/ClipItem";
 
 function Clips() {
   const [query, setQuery] = useState("월드컵");
   const [sort, setSort] = useState("accuracy");
-  const [pageNumber, setPageNumber] = useState(1);
+  const [page, setPage] = useState(1);
 
-  const { videos, isLoading, error, hasMorePage, count } =
-    useInfiniteVideoSearch(query, sort, pageNumber);
+  const { videos, isLoading, error, hasMorePage, videosCount } =
+    useInfiniteVideoSearch(query, sort, page);
 
   const inputRef = useRef();
 
@@ -21,7 +21,7 @@ function Clips() {
 
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMorePage) {
-          setPageNumber((prev) => prev + 1);
+          setPage((prev) => prev + 1);
         }
       });
 
@@ -38,7 +38,7 @@ function Clips() {
       setSort("accuracy");
     }
 
-    setPageNumber(1);
+    setPage(1);
   };
 
   const handleSortSelect = (e) => {
@@ -74,8 +74,8 @@ function Clips() {
         </select>
       ) : null}
       {query !== "" ? (
-        count ? (
-          <div>총 검색 결과 {count}개</div>
+        videosCount ? (
+          <div>총 검색 결과 {videosCount}개</div>
         ) : (
           <div>검색 결과가 존재하지 않습니다.</div>
         )

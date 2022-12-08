@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function useInfiniteVideoSearch(query, sort, pageNumber) {
+function useInfiniteVideoSearch(query, sort, page) {
   const URL = "https://dapi.kakao.com/v2/search/vclip";
   const API_KEY = "e2c4d5c53f4e3ca42459fd92d91ac39a";
 
@@ -9,7 +9,7 @@ function useInfiniteVideoSearch(query, sort, pageNumber) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [hasMorePage, setHasMorePage] = useState(false);
-  const [count, setCount] = useState(null);
+  const [videosCount, setVideosCount] = useState(null);
 
   useEffect(() => {
     setVideos([]);
@@ -29,16 +29,14 @@ function useInfiniteVideoSearch(query, sort, pageNumber) {
       params: {
         query: query,
         sort: sort,
-        page: pageNumber,
+        page: page,
       },
       cancelToken: new axios.CancelToken((c) => (cancel = c)),
     })
       .then((res) => {
-        setVideos((prev) => {
-          return [...prev, ...res.data.documents];
-        });
+        setVideos((prev) => [...prev, ...res.data.documents]);
         setHasMorePage(!res.data.meta.is_end);
-        setCount(res.data.meta.pageable_count);
+        setVideosCount(res.data.meta.pageable_count);
         setIsLoading(false);
       })
       .catch((e) => {
@@ -47,9 +45,9 @@ function useInfiniteVideoSearch(query, sort, pageNumber) {
       });
 
     return () => cancel();
-  }, [query, sort, pageNumber]);
+  }, [query, sort, page]);
 
-  return { videos, isLoading, error, hasMorePage, count };
+  return { videos, isLoading, error, hasMorePage, videosCount };
 }
 
 export default useInfiniteVideoSearch;
