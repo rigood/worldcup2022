@@ -39,6 +39,7 @@ const PlayerContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin: 10px;
+  user-select: none;
 `;
 
 const Profile = styled.div`
@@ -52,7 +53,6 @@ const Profile = styled.div`
     url(${({ bgImg }) => bgImg});
   position: relative;
   margin-bottom: 40px;
-  user-select: none;
 `;
 
 const ProfileInfo = styled.div`
@@ -96,5 +96,4 @@ const InfoGrid = styled.div`
   label {
     color: ${color.blue};
   }
-  user-select: none;
 `;
