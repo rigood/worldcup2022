@@ -4,7 +4,7 @@ import axios from "axios";
 function useKakaoSearch(section, query, sort, page) {
   // section 예시: 동영상(vclip), 이미지(image)
   const BASE_URL = `https://dapi.kakao.com/v2/search/${section}`;
-  const API_KEY = "e2c4d5c53f4e3ca42459fd92d91ac39a";
+  const API_KEY = process.env.REACT_APP_KAKAO_KEY;
   const NUM_OF_DATA_PER_PAGE = 15;
 
   const [data, setData] = useState([]);

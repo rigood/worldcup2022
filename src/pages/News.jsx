@@ -9,7 +9,7 @@ import NewsSkeleton from "./../components/News/NewsSkeleton";
 
 const BASE_URL =
   "https://newsapi.org/v2/top-headlines?country=kr&category=sports&pageSize=100";
-const API_KEY = "fdeb9675014a4e569ae16e4a53581199";
+const API_KEY = process.env.REACT_APP_NEWS_KEY;
 
 function News() {
   const url = `${BASE_URL}&apiKey=${API_KEY}`;
