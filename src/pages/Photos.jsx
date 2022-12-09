@@ -20,7 +20,6 @@ function Photos() {
     isLoading,
     error,
     hasMorePage,
-    totalCount,
   } = useKakaoSearch("image", debouncedQuery, sort, page);
 
   const lastPhotoRef = useInfiniteScroll(isLoading, hasMorePage, setPage);

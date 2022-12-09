@@ -20,7 +20,6 @@ function Clips() {
     isLoading,
     error,
     hasMorePage,
-    totalCount,
   } = useKakaoSearch("vclip", debouncedQuery, sort, page);
 
   const lastClipRef = useInfiniteScroll(isLoading, hasMorePage, setPage);

@@ -11,7 +11,6 @@ function useKakaoSearch(section, query, sort, page) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [hasMorePage, setHasMorePage] = useState(false);
-  const [totalCount, setTotalCount] = useState(null);
 
   // 검색어가 바뀌면 데이터 초기화
   // 단, 검색어가 빈 문자열인 경우 제외
@@ -51,7 +50,6 @@ function useKakaoSearch(section, query, sort, page) {
       .then((res) => {
         setData((prev) => [...prev, ...res.data.documents]);
         setHasMorePage(!res.data.meta.is_end);
-        setTotalCount(res.data.meta.pageable_count);
         setIsLoading(false);
       })
       .catch((e) => {
@@ -62,7 +60,7 @@ function useKakaoSearch(section, query, sort, page) {
     return () => cancel();
   }, [query, sort, page]);
 
-  return { data, isLoading, error, hasMorePage, totalCount };
+  return { data, isLoading, error, hasMorePage };
 }
 
 export default useKakaoSearch;
