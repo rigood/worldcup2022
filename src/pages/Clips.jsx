@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import useDebounce from "../hook/useDebounce";
 import useKakaoSearch from "../hook/useKakaoSearch";
 import useInfiniteScroll from "../hook/useInfiniteScroll";
+import RadioButtons from "../components/RadioButtons";
 import ClipItem from "../components/ClipItem";
 import ClipSkeleton from "../components/ClipSkeleton";
 
@@ -23,18 +24,8 @@ function Clips() {
   const lastClipRef = useInfiniteScroll(isLoading, hasMorePage, setPage);
 
   const handleQueryInput = (e) => {
-    const keyword = e.target.value;
-    setQuery(keyword);
-
-    if (keyword === "") {
-      setSort("accuracy");
-    }
-
+    setQuery(e.target.value);
     setPage(1);
-  };
-
-  const handleSortSelect = (e) => {
-    setSort(e.target.value);
   };
 
   const inputRef = useRef();
@@ -60,12 +51,9 @@ function Clips() {
           </button>
         )}
       </form>
-      {query !== "" ? (
-        <select onChange={handleSortSelect}>
-          <option value="accuracy">정확도</option>
-          <option value="recency">최신순</option>
-        </select>
-      ) : null}
+
+      <RadioButtons setSort={setSort} />
+
       {query !== "" ? (
         totalCount ? (
           <div>총 검색 결과 {totalCount}개</div>
