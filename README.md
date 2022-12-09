@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# Worldcup 2022
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- 네이버 카타르 월드컵 페이지에 착안하여, `월드컵 관련 각종 정보를 조회할 수 있는 서비스` 제작
+- [Demo 바로가기](https://rigood.github.io/worldcup2022)
 
-## Available Scripts
+<br>
 
-In the project directory, you can run:
+## 💻 프로젝트
 
-### `npm start`
+- 프론트엔드에서 자주 사용하는 UI 및 기능 구현을 연습하기 위한 프로젝트
+- 2022년 12월 5일 ~ (개인 프로젝트)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📌 UI/UX 및 주요 기능
 
-### `npm test`
+- 모바일 기준으로 화면 구성 (max-width: 450px)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 탭 메뉴 및 콘텐츠에 슬라이더 도입
 
-### `npm run build`
+  - PC에서는 드래그, 모바일에서는 `터치(미완성)`를 통해 슬라이더 이동
+  - 화살표 버튼 & `페이지네이션(미완성)`을 통해 원하는 지점으로 이동 가능
+  - `사용자가 슬라이더를 원하는 만큼 이동시킨 후 화살표 버튼이나 페이지네이션을 눌렀을 때`  
+    `한 페이지에 1개의 슬라이드만 보이도록 좌표 조절 예정`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 카카오 API를 통한 동영상, 이미지 검색
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  - 페이지 진입 시 '월드컵'에 대한 검색 결과 표시
+  - 월드컵 관련 인기 검색어 리스트 제공
+  - 사용자가 원하는 검색어를 입력하여 검색 가능
+  - 실시간으로 검색 결과 제공
+  - 검색 결과를 정확도순, 최신순으로 정렬 가능
+  - 무한 스크롤을 통해 데이터 제공
+  - 데이터 로딩 시 Skeleton UI 표시  
+    `(API 응답 속도가 빨라서 오히려 로딩 UI가 거슬린다는 의견 -> 제외 예정)`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- News API를 이용하여 한국 스포츠 뉴스 제공
 
-### `npm run eject`
+  - 언론사별로 기사 필터링 가능
+  - 더보기 버튼 클릭 시 추가 데이터 제공
+  - 데이터 로딩 시 Skeleton UI 표시
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- 프로필 사진 및 정보 입력
+  - 드래그 앤 드롭 또는 파일 열기 방식을 통해 프로필 사진 업로드
+  - 업로드된 사진과 `정보(미완성)`는 LocalStorage에 저장
+  - `프로필 수정 및 초기화 가능(미완성)`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🔍 구현 방법
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- 슬라이더
 
-## Learn More
+  - 별도 라이브러리 없이 순수 자바스크립트로 구현
+  - mouse, `touch(미완성)` 이벤트를 감지하여 사용자가 움직인 좌표만큼 scrollLeft 값 변경
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- API 비동기 통신
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  - 카카오 API는 axios 라이브러리, News API는 fetch API 사용
 
-### Code Splitting
+    - 카카오 동영상/이미지 검색은 검색어·정렬 조건이 변경되거나 추가 페이지를 불러올 때  
+      parameter를 변경하여 api 요청을 보내야 하므로, params 옵션을 지원하는 axios 사용
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    - 스포츠 뉴스는 데이터 양이 제한되는 무료 API를 사용하므로,  
+      초기에 fetch API를 통해 모든 데이터를 수신받고 사용자 요청에 따라  
+      filter, slice 메서드를 통해 데이터를 편집하여 제공
+    - 비동기 통신 관련 로직을 커스텀 훅으로 분리하여 재사용
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  - 실시간 검색 최적화 작업
+    - debounce를 적용하여 불필요한 API 호출 방지
+    - axios의 cancelToken을 사용하여 이전 요청 취소
