@@ -3,10 +3,12 @@ import styled from "styled-components";
 import useDragSlider from "../../hook/useDragSlider";
 import { TAB_ITEMS } from "../../data/tab-items";
 import color from "../../style/color";
+import { checkLocalhost } from "./../../utils/checkLocalhost";
 
 function Tab({ tabIndex, setTabIndex }) {
   const tabContainerRef = useRef(null);
   const isDragging = useDragSlider(tabContainerRef);
+  const isLocalhost = checkLocalhost();
 
   const handleTabClick = (index) => setTabIndex(index);
 
@@ -18,6 +20,7 @@ function Tab({ tabIndex, setTabIndex }) {
             key={index}
             className={tabIndex === index && "active"}
             onClick={() => handleTabClick(index)}
+            hide={tab === "News" && !isLocalhost ? true : false}
           >
             {tab}
           </TabItem>
@@ -37,6 +40,7 @@ const TabItem = styled.li`
   cursor: pointer;
   user-select: none;
   transition: all 0.3s ease-in-out;
+  display: ${({ hide }) => (hide ? "none" : "flex")};
 
   &.active {
     border-color: white;
