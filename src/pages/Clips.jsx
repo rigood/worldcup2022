@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import useDebounce from "../hook/useDebounce";
-import useKakaoInfiniteSearch from "../hook/useKakaoInfiniteSearch";
+import useKakaoSearch from "../hook/useKakaoSearch";
 import useInfiniteScroll from "../hook/useInfiniteScroll";
 import ClipItem from "../components/ClipItem";
 import ClipSkeleton from "../components/ClipSkeleton";
@@ -18,7 +18,7 @@ function Clips() {
     error,
     hasMorePage,
     totalCount,
-  } = useKakaoInfiniteSearch("vclip", debouncedQuery, sort, page);
+  } = useKakaoSearch("vclip", debouncedQuery, sort, page);
 
   const lastClipRef = useInfiniteScroll(isLoading, hasMorePage, setPage);
 

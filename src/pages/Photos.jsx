@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from "react";
 import useDebounce from "../hook/useDebounce";
-import useKakaoInfiniteSearch from "../hook/useKakaoInfiniteSearch";
+import useKakaoSearch from "../hook/useKakaoSearch";
 import useInfiniteScroll from "../hook/useInfiniteScroll";
 import PhotoItem from "../components/PhotoItem";
 import PhotoSkeleton from "../components/PhotoSkeleton";
@@ -18,7 +18,7 @@ function Photos() {
     error,
     hasMorePage,
     totalCount,
-  } = useKakaoInfiniteSearch("image", debouncedQuery, sort, page);
+  } = useKakaoSearch("image", debouncedQuery, sort, page);
 
   const lastPhotoRef = useInfiniteScroll(isLoading, hasMorePage, setPage);
 
