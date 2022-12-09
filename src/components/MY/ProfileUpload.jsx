@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { ReactComponent as ProfileIcon } from "../../svg/profile.svg";
 import useLocalStorage from "../../hook/useLocalStorage";
-import Button from "./../Common/Button";
+import Button from "../Common/Button";
 
 function ProfileUpload() {
   const [active, setActive] = useState(false);

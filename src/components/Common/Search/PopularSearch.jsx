@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function FavoriteSearch({ setQuery, setPage }) {
+function PopularSearch({ setQuery, setPage }) {
   const term_list = ["손흥민", "조규성", "황희찬", "월드컵 우승국"];
 
   const handleTermClick = (e) => {
@@ -22,7 +22,7 @@ function FavoriteSearch({ setQuery, setPage }) {
   );
 }
 
-export default FavoriteSearch;
+export default PopularSearch;
 
 const Wrapper = styled.div`
   display: flex;
