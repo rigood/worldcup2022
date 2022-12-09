@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-function useDragSlider(ref, slideWidth, index, setIndex) {
+function useSlider(ref) {
   let isDragging;
 
   const handleDragStart = () => {
@@ -32,9 +32,9 @@ function useDragSlider(ref, slideWidth, index, setIndex) {
       };
     }
     return () => {};
-  }, [isDragging]);
+  }, []);
 
-  return isDragging;
+  return null;
 }
 
-export default useDragSlider;
+export default useSlider;

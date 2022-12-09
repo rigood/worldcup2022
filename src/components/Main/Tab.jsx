@@ -1,13 +1,14 @@
 import { useRef } from "react";
 import styled from "styled-components";
-import useDragSlider from "../../hook/useDragSlider";
+import useSlider from "../../hook/useSlider";
 import { TAB_ITEMS } from "../../data/tab-items";
 import color from "../../style/color";
 import { checkLocalhost } from "./../../utils/checkLocalhost";
 
 function Tab({ tabIndex, setTabIndex }) {
   const tabContainerRef = useRef(null);
-  const isDragging = useDragSlider(tabContainerRef);
+  useSlider(tabContainerRef);
+
   const isLocalhost = checkLocalhost();
 
   const handleTabClick = (index) => setTabIndex(index);
@@ -18,9 +19,9 @@ function Tab({ tabIndex, setTabIndex }) {
         return (
           <TabItem
             key={index}
+            hide={tab === "News" && !isLocalhost ? true : false}
             className={tabIndex === index && "active"}
             onClick={() => handleTabClick(index)}
-            hide={tab === "News" && !isLocalhost ? true : false}
           >
             {tab}
           </TabItem>
