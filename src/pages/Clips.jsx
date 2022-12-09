@@ -1,16 +1,23 @@
 import { useState, useRef, useCallback } from "react";
-import useInfiniteVideoSearch from "../hook/useInfiniteVideoSearch";
+import useDebounce from "../hook/useDebounce";
+import useKakaoInfiniteSearch from "../hook/useKakaoInfiniteSearch";
 import ClipItem from "../components/ClipItem";
+import ClipSkeleton from "../components/ClipSkeleton";
 
 function Clips() {
   const [query, setQuery] = useState("월드컵");
   const [sort, setSort] = useState("accuracy");
   const [page, setPage] = useState(1);
 
-  const { videos, isLoading, error, hasMorePage, videosCount } =
-    useInfiniteVideoSearch(query, sort, page);
+  const debouncedQuery = useDebounce(query, 500);
 
-  const inputRef = useRef();
+  const {
+    data: videos,
+    isLoading,
+    error,
+    hasMorePage,
+    totalCount,
+  } = useKakaoInfiniteSearch("vclip", debouncedQuery, sort, page);
 
   const observer = useRef();
   const lastVideoRef = useCallback(
@@ -45,6 +52,7 @@ function Clips() {
     setSort(e.target.value);
   };
 
+  const inputRef = useRef();
   const handleResetButton = () => {
     setQuery("");
     inputRef.current.focus();
@@ -74,8 +82,8 @@ function Clips() {
         </select>
       ) : null}
       {query !== "" ? (
-        videosCount ? (
-          <div>총 검색 결과 {videosCount}개</div>
+        totalCount ? (
+          <div>총 검색 결과 {totalCount}개</div>
         ) : (
           <div>검색 결과가 존재하지 않습니다.</div>
         )
@@ -92,7 +100,7 @@ function Clips() {
       {query === "" ? (
         <div>추천 검색어: 월드컵, 손흥민, 조규성</div>
       ) : isLoading ? (
-        <div>Loading</div>
+        <ClipSkeleton count={15} />
       ) : error ? (
         <div>Error</div>
       ) : null}
