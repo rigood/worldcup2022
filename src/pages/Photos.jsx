@@ -1,5 +1,7 @@
 import { useState, useRef, useCallback } from "react";
+import useDebounce from "../hook/useDebounce";
 import useKakaoInfiniteSearch from "../hook/useKakaoInfiniteSearch";
+
 import PhotoItem from "../components/PhotoItem";
 import PhotoSkeleton from "../components/PhotoSkeleton";
 
@@ -8,13 +10,15 @@ function Photos() {
   const [sort, setSort] = useState("accuracy");
   const [page, setPage] = useState(1);
 
+  const debouncedQuery = useDebounce(query, 500);
+
   const {
     data: images,
     isLoading,
     error,
     hasMorePage,
     totalCount,
-  } = useKakaoInfiniteSearch("image", query, sort, page);
+  } = useKakaoInfiniteSearch("image", debouncedQuery, sort, page);
 
   const observer = useRef();
   const lastImageRef = useCallback(
