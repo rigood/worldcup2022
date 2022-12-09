@@ -1,22 +1,16 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 function useFetch(url) {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [options, setOptions] = useState({});
-
-  const doFetch = useCallback((options = {}) => {
-    setOptions(options);
-    setIsLoading(true);
-  }, []);
 
   useEffect(() => {
-    if (!isLoading) return;
+    setIsLoading(true);
 
     const fetchData = async () => {
       try {
-        const response = await fetch(url, options);
+        const response = await fetch(url);
 
         if (!response.ok) {
           throw new Error(`${response.status} Error`);
@@ -32,9 +26,9 @@ function useFetch(url) {
     };
 
     fetchData();
-  }, [url, isLoading, options]);
+  }, [url]);
 
-  return [{ data, isLoading, error }, doFetch];
+  return { data, isLoading, error };
 }
 
 export default useFetch;
