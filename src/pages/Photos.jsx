@@ -1,17 +1,17 @@
-import { useState, useRef, useCallback } from "react";
+import { useState } from "react";
 import useDebounce from "../hook/useDebounce";
 import useKakaoSearch from "../hook/useKakaoSearch";
 import useInfiniteScroll from "../hook/useInfiniteScroll";
+import SearchForm from "../components/SearchForm";
 import RadioButtons from "../components/RadioButtons";
 import PhotoItem from "../components/PhotoItem";
 import PhotoSkeleton from "../components/PhotoSkeleton";
 
 function Photos() {
   const [query, setQuery] = useState("월드컵");
+  const debouncedQuery = useDebounce(query, 500);
   const [sort, setSort] = useState("accuracy");
   const [page, setPage] = useState(1);
-
-  const debouncedQuery = useDebounce(query, 500);
 
   const {
     data: images,
@@ -23,35 +23,9 @@ function Photos() {
 
   const lastPhotoRef = useInfiniteScroll(isLoading, hasMorePage, setPage);
 
-  const handleQueryInput = (e) => {
-    setQuery(e.target.value);
-    setPage(1);
-  };
-
-  const inputRef = useRef();
-  const handleResetButton = () => {
-    setQuery("");
-    inputRef.current.focus();
-  };
-
   return (
     <>
-      <form>
-        <input
-          type="text"
-          placeholder="검색어를 입력하세요"
-          value={query}
-          onChange={handleQueryInput}
-          ref={inputRef}
-          autoFocus
-        />
-        {query !== "" && (
-          <button type="button" onClick={handleResetButton}>
-            ❌
-          </button>
-        )}
-      </form>
-
+      <SearchForm query={query} setQuery={setQuery} setPage={setPage} />
       <RadioButtons setSort={setSort} />
 
       {query !== "" ? (
