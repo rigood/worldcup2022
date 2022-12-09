@@ -13,13 +13,23 @@ function useKakaoSearch(section, query, sort, page) {
   const [hasMorePage, setHasMorePage] = useState(false);
   const [totalCount, setTotalCount] = useState(null);
 
-  // 검색어, 정렬 조건이 바뀌면 데이터 초기화
+  // 검색어가 바뀌면 데이터 초기화
+  // 단, 검색어가 빈 문자열인 경우 제외
+  useEffect(() => {
+    if (query === "") return;
+    setData([]);
+  }, [query]);
+
+  // 정렬 조건이 바뀌면 데이터 초기화
   useEffect(() => {
     setData([]);
-  }, [query, sort]);
+  }, [sort]);
 
   // 검색어, 정렬 조건, (무한 스크롤 요청으로) 페이지가 바뀌면 api 호출 실행
+  // 단, 검색어가 빈 문자열인 경우 제외
   useEffect(() => {
+    if (query === "") return;
+
     setIsLoading(true);
     setError(false);
     let cancel;

@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { formatDate } from "../utils/format";
 
-function PhotoItem({ image }) {
+function PhotoItem({ image }, ref) {
   const {
     collection,
     thumbnail_url,
@@ -15,9 +15,9 @@ function PhotoItem({ image }) {
   return (
     <li>
       <img src={thumbnail_url} />
-      <div>{formatDate(datetime)}</div>
+      <div ref={ref}>{formatDate(datetime)}</div>
     </li>
   );
 }
 
-export default PhotoItem;
+export default forwardRef(PhotoItem);

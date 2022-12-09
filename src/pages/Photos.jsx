@@ -6,6 +6,7 @@ import SearchForm from "../components/SearchForm";
 import RadioButtons from "../components/RadioButtons";
 import PhotoItem from "../components/PhotoItem";
 import PhotoSkeleton from "../components/PhotoSkeleton";
+import ErrorElement from "../components/ErrorElement";
 
 function Photos() {
   const [query, setQuery] = useState("월드컵");
@@ -28,30 +29,18 @@ function Photos() {
       <SearchForm query={query} setQuery={setQuery} setPage={setPage} />
       <RadioButtons setSort={setSort} />
 
-      {query !== "" ? (
-        totalCount ? (
-          <div>총 검색 결과 {totalCount}개</div>
-        ) : (
-          <div>검색 결과가 존재하지 않습니다.</div>
-        )
-      ) : null}
       <ul>
         {images?.map((image, index) => {
           if (images.length === index + 1) {
-            return <PhotoItem key={index} image={image} />;
+            return <PhotoItem ref={lastPhotoRef} key={index} image={image} />;
           } else {
             return <PhotoItem key={index} image={image} />;
           }
         })}
       </ul>
-      <div ref={lastPhotoRef} />
-      {query === "" ? (
-        <div>추천 검색어: 월드컵, 손흥민, 조규성</div>
-      ) : isLoading ? (
-        <PhotoSkeleton count={15} />
-      ) : error ? (
-        <div>Error</div>
-      ) : null}
+
+      {isLoading && <PhotoSkeleton count={15} />}
+      {error && <ErrorElement />}
     </>
   );
 }
