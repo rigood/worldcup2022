@@ -3,6 +3,7 @@ import useDebounce from "../hook/useDebounce";
 import useKakaoSearch from "../hook/useKakaoSearch";
 import useInfiniteScroll from "../hook/useInfiniteScroll";
 import SearchForm from "../components/SearchForm";
+import FavoriteSearch from "../components/FavoriteSearch";
 import RadioButtons from "../components/RadioButtons";
 import PhotoItem from "../components/PhotoItem";
 import PhotoSkeleton from "../components/PhotoSkeleton";
@@ -27,6 +28,7 @@ function Photos() {
   return (
     <>
       <SearchForm query={query} setQuery={setQuery} setPage={setPage} />
+      <FavoriteSearch setQuery={setQuery} setPage={setPage} />
       <RadioButtons setSort={setSort} />
 
       <ul>
