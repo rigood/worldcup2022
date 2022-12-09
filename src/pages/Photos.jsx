@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import useDebounce from "../hook/useDebounce";
 import useKakaoInfiniteSearch from "../hook/useKakaoInfiniteSearch";
-
+import useInfiniteScroll from "../hook/useInfiniteScroll";
 import PhotoItem from "../components/PhotoItem";
 import PhotoSkeleton from "../components/PhotoSkeleton";
 
@@ -20,29 +20,7 @@ function Photos() {
     totalCount,
   } = useKakaoInfiniteSearch("image", debouncedQuery, sort, page);
 
-  const observer = useRef();
-  const lastImageRef = useCallback(
-    (node) => {
-      if (isLoading) return;
-
-      if (observer.current) observer.current.disconnect();
-
-      observer.current = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && hasMorePage) {
-            setPage((prev) => prev + 1);
-          }
-        },
-        {
-          threshold: 1,
-          rootMargin: "100px",
-        }
-      );
-
-      if (node) observer.current.observe(node);
-    },
-    [isLoading, hasMorePage]
-  );
+  const lastPhotoRef = useInfiniteScroll(isLoading, hasMorePage, setPage);
 
   const handleQueryInput = (e) => {
     const keyword = e.target.value;
@@ -104,7 +82,7 @@ function Photos() {
           }
         })}
       </ul>
-      <div ref={lastImageRef} />
+      <div ref={lastPhotoRef} />
       {query === "" ? (
         <div>추천 검색어: 월드컵, 손흥민, 조규성</div>
       ) : isLoading ? (

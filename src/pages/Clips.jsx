@@ -1,6 +1,7 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef } from "react";
 import useDebounce from "../hook/useDebounce";
 import useKakaoInfiniteSearch from "../hook/useKakaoInfiniteSearch";
+import useInfiniteScroll from "../hook/useInfiniteScroll";
 import ClipItem from "../components/ClipItem";
 import ClipSkeleton from "../components/ClipSkeleton";
 
@@ -19,23 +20,7 @@ function Clips() {
     totalCount,
   } = useKakaoInfiniteSearch("vclip", debouncedQuery, sort, page);
 
-  const observer = useRef();
-  const lastVideoRef = useCallback(
-    (node) => {
-      if (isLoading) return;
-
-      if (observer.current) observer.current.disconnect();
-
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMorePage) {
-          setPage((prev) => prev + 1);
-        }
-      });
-
-      if (node) observer.current.observe(node);
-    },
-    [isLoading, hasMorePage]
-  );
+  const lastClipRef = useInfiniteScroll(isLoading, hasMorePage, setPage);
 
   const handleQueryInput = (e) => {
     const keyword = e.target.value;
@@ -91,7 +76,7 @@ function Clips() {
       <ul>
         {videos?.map((video, index) => {
           if (videos.length === index + 1) {
-            return <ClipItem ref={lastVideoRef} key={index} video={video} />;
+            return <ClipItem ref={lastClipRef} key={index} video={video} />;
           } else {
             return <ClipItem key={index} video={video} />;
           }
