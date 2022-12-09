@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import color from "../style/color";
-import Button from "../components/Button";
+import Button from "./../components/Common/Button";
 import { ReactComponent as FilterIcon } from "../svg/filter.svg";
 import useFetch from "../hook/useFetch";
-import ArticleItem from "../components/ArticleItem";
-import NewsSkeleton from "../components/NewsSkeleton";
+import ArticleItem from "./../components/News/ArticleItem";
+import NewsSkeleton from "./../components/News/NewsSkeleton";
 
 const BASE_URL =
   "https://newsapi.org/v2/top-headlines?country=kr&category=sports&pageSize=100";

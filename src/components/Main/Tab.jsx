@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import styled from "styled-components";
-import useDragSlider from "../hook/useDragSlider";
-import { TAB_ITEMS } from "../data/tab-items";
-import color from "../style/color";
+import useDragSlider from "../../hook/useDragSlider";
+import { TAB_ITEMS } from "../../data/tab-items";
+import color from "../../style/color";
 
 function Tab({ tabIndex, setTabIndex }) {
   const tabContainerRef = useRef(null);

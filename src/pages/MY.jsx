@@ -1,9 +1,9 @@
 import { useState, useRef } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import color from "../style/color";
-import ProfileUpload from "../components/ProfileUpload";
-import ProfileInfo from "../components/ProfileInfo";
+import color from "./../style/color";
+import ProfileUpload from "./../components/Profile/ProfileUpload";
+import ProfileInfo from "./../components/Profile/ProfileInfo";
 
 // import { ReactComponent as Logo } from "../svg/trophy.svg";
 

@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import styled from "styled-components";
 import color from "../style/color";
 import { KOREA_PLAYERS } from "../data/korea-players";
-import PlayerItem from "../components/PlayerItem";
+import PlayerItem from "./../components/Player/PlayerItem";
 import { ReactComponent as PlayerIcon } from "../svg/player.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

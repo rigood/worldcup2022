@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import color from "../style/color";
-import { ReactComponent as Logo } from "../svg/trophy.svg";
+import color from "../../style/color";
+import { ReactComponent as Logo } from "../../svg/trophy.svg";
 
 function Header() {
   return (

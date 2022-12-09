@@ -1,6 +1,6 @@
-import "../style/skeleton.css";
+import "../../style/skeleton.css";
 
-function ClipSkeleton({ count }) {
+function NewsSkeleton({ count }) {
   return (
     <>
       {Array(count)
@@ -30,4 +30,4 @@ function ClipSkeleton({ count }) {
   );
 }
 
-export default ClipSkeleton;
+export default NewsSkeleton;

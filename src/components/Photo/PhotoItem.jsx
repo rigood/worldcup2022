@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { formatDate } from "../utils/format";
+import { formatDate } from "../../utils/format";
 
 function PhotoItem({ image }, ref) {
   const {

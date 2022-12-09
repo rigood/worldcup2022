@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import color from "../style/color";
+import color from "../../style/color";
 
 function PlayerItem({ player }) {
   return (

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { formatDate } from "../utils/format";
-import color from "../style/color";
-import maxLines from "../style/maxLines";
+import { formatDate } from "../../utils/format";
+import color from "../../style/color";
+import maxLines from "../../style/maxLines";
 
 const DEFAULT_IMG = "https://via.placeholder.com/100x66?text=WorldCup";
 

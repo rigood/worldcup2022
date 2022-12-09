@@ -1,6 +1,6 @@
-import "../style/skeleton.css";
+import "../../style/skeleton.css";
 
-function PhotoSkeleton({ count }) {
+function ClipSkeleton({ count }) {
   return (
     <>
       {Array(count)
@@ -30,4 +30,4 @@ function PhotoSkeleton({ count }) {
   );
 }
 
-export default PhotoSkeleton;
+export default ClipSkeleton;

@@ -1,6 +1,6 @@
-import "../style/skeleton.css";
+import "../../style/skeleton.css";
 
-function NewsSkeleton({ count }) {
+function PhotoSkeleton({ count }) {
   return (
     <>
       {Array(count)
@@ -30,4 +30,4 @@ function NewsSkeleton({ count }) {
   );
 }
 
-export default NewsSkeleton;
+export default PhotoSkeleton;

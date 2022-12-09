@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { formatDate, formatSeconds } from "../utils/format";
+import { formatDate, formatSeconds } from "../../utils/format";
 
 function ClipItem({ video }, ref) {
   const { author, datetime, play_time, thumbnail, title, url } = video;

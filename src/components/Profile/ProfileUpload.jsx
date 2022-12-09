@@ -1,11 +1,11 @@
 import { useState, useRef } from "react";
 import styled from "styled-components";
-import color from "../style/color";
+import color from "../../style/color";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
-import Button from "../components/Button";
-import { ReactComponent as ProfileIcon } from "../svg/profile.svg";
-import useLocalStorage from "../hook/useLocalStorage";
+import { ReactComponent as ProfileIcon } from "../../svg/profile.svg";
+import useLocalStorage from "../../hook/useLocalStorage";
+import Button from "./../Common/Button";
 
 function ProfileUpload() {
   const [active, setActive] = useState(false);
