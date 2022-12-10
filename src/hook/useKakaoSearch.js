@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function useKakaoSearch(section, query, sort, page) {
+function useKakaoSearch(section, query, sort, page, size) {
   // section 예시: 동영상(vclip), 이미지(image)
   const BASE_URL = `https://dapi.kakao.com/v2/search/${section}`;
   const API_KEY = process.env.REACT_APP_KAKAO_KEY;
-  const NUM_OF_DATA_PER_PAGE = 15;
 
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -43,7 +42,7 @@ function useKakaoSearch(section, query, sort, page) {
         query: query,
         sort: sort,
         page: page,
-        size: NUM_OF_DATA_PER_PAGE,
+        size: size,
       },
       cancelToken: new axios.CancelToken((c) => (cancel = c)),
     })
@@ -54,6 +53,7 @@ function useKakaoSearch(section, query, sort, page) {
       })
       .catch((e) => {
         if (axios.isCancel(e)) return;
+        setIsLoading(false);
         setError(true);
       });
 

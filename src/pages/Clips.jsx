@@ -14,6 +14,7 @@ import ErrorElement from "./../components/Common/ErrorElement";
 import { faVideo } from "@fortawesome/free-solid-svg-icons";
 
 function Clips() {
+  const PAGE_SIZE = 15;
   const [query, setQuery] = useState("월드컵");
   const debouncedQuery = useDebounce(query, 500);
   const [sort, setSort] = useState("accuracy");
@@ -24,7 +25,7 @@ function Clips() {
     isLoading,
     error,
     hasMorePage,
-  } = useKakaoSearch("vclip", debouncedQuery, sort, page);
+  } = useKakaoSearch("vclip", debouncedQuery, sort, page, PAGE_SIZE);
 
   const lastClipRef = useInfiniteScroll(isLoading, hasMorePage, setPage);
 
@@ -51,7 +52,7 @@ function Clips() {
         })}
       </ul>
 
-      {isLoading && <ClipSkeleton count={15} />}
+      {isLoading && <ClipSkeleton count={PAGE_SIZE} />}
       {error && <ErrorElement />}
     </>
   );

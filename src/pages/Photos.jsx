@@ -14,6 +14,7 @@ import ErrorElement from "./../components/Common/ErrorElement";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 
 function Photos() {
+  const PAGE_SIZE = 14;
   const [query, setQuery] = useState("월드컵");
   const debouncedQuery = useDebounce(query, 500);
   const [sort, setSort] = useState("accuracy");
@@ -24,7 +25,7 @@ function Photos() {
     isLoading,
     error,
     hasMorePage,
-  } = useKakaoSearch("image", debouncedQuery, sort, page);
+  } = useKakaoSearch("image", debouncedQuery, sort, page, PAGE_SIZE);
 
   const lastPhotoRef = useInfiniteScroll(isLoading, hasMorePage, setPage);
 
@@ -55,7 +56,7 @@ function Photos() {
 
       {isLoading && (
         <PhotoGrid>
-          <PhotoSkeleton count={15} />
+          <PhotoSkeleton count={PAGE_SIZE} />
         </PhotoGrid>
       )}
 
