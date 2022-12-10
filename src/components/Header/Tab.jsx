@@ -2,7 +2,7 @@ import { useRef } from "react";
 import styled from "styled-components";
 import useSlider from "../../hook/useSlider";
 import { TAB_ITEMS } from "../../data/tab-items";
-import { checkLocalhost } from "./../../utils/checkLocalhost";
+import { checkLocalhost } from "../../utils/checkLocalhost";
 
 function Tab({ tabIndex, setTabIndex }) {
   const tabContainerRef = useRef(null);
@@ -33,13 +33,16 @@ function Tab({ tabIndex, setTabIndex }) {
 export default Tab;
 
 const TabItem = styled.li`
-  margin: 10px 10px 0 10px;
+  &:not(:last-child) {
+    margin-right: 25px;
+  }
   padding-bottom: 10px;
   border-bottom: 5px solid transparent;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  color: ${({ theme }) => theme.color.lightwhite};
   cursor: pointer;
-  user-select: none;
   transition: all 0.3s ease-in-out;
+  user-select: none;
   display: ${({ hide }) => (hide ? "none" : "flex")};
 
   &.active {
@@ -56,11 +59,8 @@ const TabItem = styled.li`
 
 const TabContainer = styled.ul`
   display: flex;
-  column-gap: 20px;
-  padding: 10px 10px 0 10px;
+  padding: 10px 20px 0 20px;
   background-color: ${({ theme }) => theme.color.primary};
-  color: white;
-  font-size: 16px;
   overflow-x: scroll;
   scroll-behavior: smooth;
 

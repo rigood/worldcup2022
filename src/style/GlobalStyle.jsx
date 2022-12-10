@@ -23,6 +23,9 @@ ${reset}
 }
 
 body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: 'Pretendard-Regular';
   line-height: 1.3;
   &::-webkit-scrollbar{
@@ -30,20 +33,9 @@ body{
   }
 }
 
-ul, li{
-  list-style: none;
-}
-
 a{
   text-decoration: none;
   color: inherit;
-}
-
-select{
-  border: none;
-  outline: none;
-  font-family: inherit;
-  font-size: inherit;
 }
 
 button{
@@ -55,6 +47,18 @@ button{
   color: inherit;
   cursor: pointer;
 }
+
+select{
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+ul, li{
+  list-style: none;
+}
+
 `;
 
 export default GlobalStyles;

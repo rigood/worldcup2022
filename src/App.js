@@ -3,8 +3,8 @@ import { ThemeProvider } from "styled-components";
 import styled from "styled-components";
 import theme from "./style/theme";
 import GlobalStyles from "./style/GlobalStyle";
-import Header from "./components/Main/Header";
-import Tab from "./components/Main/Tab";
+import Title from "./components/Header/Title";
+import Tab from "./components/Header/Tab";
 import Home from "./pages/Home";
 import Players from "./pages/Players";
 import Clips from "./pages/Clips";
@@ -19,22 +19,22 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        <MainLayout>
-          <MainContainer>
-            <Header />
+        <Wrapper>
+          <Header>
+            <Title />
             <Tab tabIndex={tabIndex} setTabIndex={setTabIndex} />
-            <TabContentsWrapper>
-              {tabIndex === 0 && <Home />}
-              {/* {tabIndex === 1 && <Matches />} */}
-              {tabIndex === 2 && <Players />}
-              {tabIndex === 3 && <Clips />}
-              {tabIndex === 4 && <Photos />}
-              {tabIndex === 5 && <MY />}
-              {/* {tabIndex === 6 && <Store />} */}
-              {tabIndex === 7 && <News />}
-            </TabContentsWrapper>
-          </MainContainer>
-        </MainLayout>
+          </Header>
+          <Main>
+            {tabIndex === 0 && <Home />}
+            {/* {tabIndex === 1 && <Matches />} */}
+            {tabIndex === 2 && <Players />}
+            {tabIndex === 3 && <Clips />}
+            {tabIndex === 4 && <Photos />}
+            {tabIndex === 5 && <MY />}
+            {/* {tabIndex === 6 && <Store />} */}
+            {tabIndex === 7 && <News />}
+          </Main>
+        </Wrapper>
       </ThemeProvider>
     </>
   );
@@ -42,23 +42,19 @@ function App() {
 
 export default App;
 
-const MainLayout = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const MainContainer = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   max-width: 450px;
   min-height: 100vh;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 `;
 
-const TabContentsWrapper = styled.div`
-  height: 100%;
+const Header = styled.nav`
+  position: sticky;
+  top: 0;
+`;
+
+const Main = styled.main`
   padding: 20px;
   display: flex;
   flex-direction: column;
