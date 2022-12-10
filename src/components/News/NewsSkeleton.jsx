@@ -12,11 +12,11 @@ function NewsSkeleton({ count }) {
               style={{
                 padding: "15px 0",
                 display: "grid",
-                gridTemplateColumns: "3fr 7fr",
+                gridTemplateColumns: "115px auto",
               }}
             >
               <div>
-                <div className="skeleton thumbnail" />
+                <div className="skeleton newsThumbnail" />
               </div>
               <div>
                 <div className="skeleton text" />

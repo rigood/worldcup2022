@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useDebounce from "../hook/useDebounce";
 import useKakaoSearch from "../hook/useKakaoSearch";
@@ -6,7 +7,7 @@ import useInfiniteScroll from "../hook/useInfiniteScroll";
 import TitleContainer from "../components/Common/TitleContainer";
 import SearchForm from "./../components/Common/Search/SearchForm";
 import PopularSearch from "./../components/Common/Search/PopularSearch";
-import RadioButtons from "./../components/Common/Search/RadioButtons";
+import SortRadioButtons from "./../components/Common/Search/SortRadioButtons";
 import ClipItem from "./../components/Clip/ClipItem";
 import ClipSkeleton from "./../components/Clip/ClipSkeleton";
 import ErrorElement from "./../components/Common/ErrorElement";
@@ -29,14 +30,16 @@ function Clips() {
 
   return (
     <>
-      <TitleContainer>
-        <FontAwesomeIcon icon={faVideo} />
-        <h2>동영상 검색</h2>
-      </TitleContainer>
+      <TitleSortContainer>
+        <TitleContainer>
+          <FontAwesomeIcon icon={faVideo} />
+          <h2>동영상 검색</h2>
+        </TitleContainer>
+        <SortRadioButtons setSort={setSort} />
+      </TitleSortContainer>
 
       <SearchForm query={query} setQuery={setQuery} setPage={setPage} />
       <PopularSearch setQuery={setQuery} setPage={setPage} />
-      <RadioButtons setSort={setSort} />
 
       <ul>
         {videos?.map((video, index) => {
@@ -55,3 +58,9 @@ function Clips() {
 }
 
 export default Clips;
+
+const TitleSortContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;

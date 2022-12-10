@@ -23,10 +23,6 @@ ${reset}
 }
 
 body{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Pretendard-Regular';
   line-height: 1.3;
   &::-webkit-scrollbar{
     display: none
@@ -46,6 +42,12 @@ button{
   font-size: inherit;
   color: inherit;
   cursor: pointer;
+}
+
+input, input::placeholder{
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
 }
 
 select{

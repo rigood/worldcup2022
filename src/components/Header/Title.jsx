@@ -29,7 +29,6 @@ const Text = styled.h1`
   font-weight: bold;
   font-family: "GmarketSansMedium";
   color: white;
-  margin-bottom: 5px;
 `;
 
 const SubText = styled.span`

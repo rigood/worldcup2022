@@ -46,16 +46,22 @@ const Wrapper = styled.div`
   width: 100%;
   max-width: 450px;
   min-height: 100vh;
+  margin: 0 auto;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 `;
 
 const Header = styled.nav`
   position: sticky;
   top: 0;
+  z-index: 9999;
 `;
 
 const Main = styled.main`
-  padding: 20px;
   display: flex;
   flex-direction: column;
+  padding: 20px;
+
+  @media (max-width: 449px) {
+    padding: 15px 10px;
+  }
 `;

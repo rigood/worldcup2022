@@ -39,6 +39,7 @@ const TabItem = styled.li`
   padding-bottom: 10px;
   border-bottom: 5px solid transparent;
   font-size: 16px;
+  font-family: "GmarketSansMedium";
   color: ${({ theme }) => theme.color.lightwhite};
   cursor: pointer;
   transition: all 0.3s ease-in-out;

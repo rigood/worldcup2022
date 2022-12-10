@@ -8,7 +8,7 @@ import NewsSkeleton from "./../components/News/NewsSkeleton";
 import ErrorElement from "../components/Common/ErrorElement";
 import Button from "./../components/Common/Button";
 import TitleContainer from "../components/Common/TitleContainer";
-import { faNewspaper } from "@fortawesome/free-solid-svg-icons";
+import { faSoccerBall } from "@fortawesome/free-solid-svg-icons";
 
 const BASE_URL =
   "https://newsapi.org/v2/top-headlines?country=kr&category=sports&pageSize=100";
@@ -35,12 +35,13 @@ function News() {
 
   return (
     <>
-      <TitleContainer>
-        <FontAwesomeIcon icon={faNewspaper} />
-        <h2>스포츠 뉴스</h2>
-      </TitleContainer>
-
-      <NewsFilter articles={articles} setFilter={setFilter} />
+      <TitleFilterContainer>
+        <TitleContainer>
+          <FontAwesomeIcon icon={faSoccerBall} />
+          <h2>스포츠 뉴스</h2>
+        </TitleContainer>
+        <NewsFilter articles={articles} setFilter={setFilter} />
+      </TitleFilterContainer>
 
       <ArticleList>
         {filteredArticles?.slice(0, index).map((article, index) => {
@@ -59,6 +60,12 @@ function News() {
 }
 
 export default News;
+
+const TitleFilterContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
 
 const ArticleList = styled.ul`
   display: flex;

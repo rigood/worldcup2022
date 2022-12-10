@@ -12,11 +12,11 @@ function ClipSkeleton({ count }) {
               style={{
                 padding: "15px 0",
                 display: "grid",
-                gridTemplateColumns: "3fr 7fr",
+                gridTemplateColumns: "135px auto",
               }}
             >
               <div>
-                <div className="skeleton thumbnail" />
+                <div className="skeleton videoThumbnail" />
               </div>
               <div>
                 <div className="skeleton text" />

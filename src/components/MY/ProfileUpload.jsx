@@ -72,7 +72,7 @@ function ProfileUpload() {
           className={active ? "active" : null}
         >
           {imgUrl ? (
-            <img src={imgUrl} />
+            <img src={imgUrl} alt="프로필 사진" />
           ) : (
             <div>
               <div className="upload-icon">
@@ -114,7 +114,7 @@ const UploadContainer = styled.div`
   border-radius: 20px;
   overflow: hidden;
   box-shadow: ${({ theme }) => theme.shadow.boxShadow2};
-  color: ${({ theme }) => theme.color.blue};
+  color: ${({ theme }) => theme.color.primary};
   cursor: pointer;
   &.active {
     opacity: 0.5;

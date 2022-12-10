@@ -11,13 +11,23 @@ function ArticleItem({ article }) {
   return (
     <Wrapper>
       <div className="leftCol">
-        <a href={url} target="_blank">
-          <img src={urlToImage || DEFAULT_IMG} />
+        <a
+          href={url}
+          target="_blank"
+          title="해당 기사(영상)으로 이동합니다."
+          rel="noopener noreferrer"
+        >
+          <img src={urlToImage || DEFAULT_IMG} alt="기사 썸네일" />
         </a>
       </div>
       <div className="rightCol">
         <h2 className="headline">
-          <a href={url} target="_blank">
+          <a
+            href={url}
+            target="_blank"
+            title="해당 기사(영상)으로 이동합니다."
+            rel="noopener noreferrer"
+          >
             {headline}
           </a>
         </h2>
@@ -34,15 +44,15 @@ export default ArticleItem;
 const Wrapper = styled.li`
   padding: 15px 0;
   display: grid;
-  grid-template-columns: 3fr 7fr;
-  text-align: start;
+  grid-template-columns: 115px auto;
 
   .leftCol {
-    img {
-      width: 100px;
-      height: 66px;
-      object-fit: cover;
-      border-radius: 10px;
+    a {
+      img {
+        width: 100px;
+        height: 66px;
+        border-radius: 5px;
+      }
     }
   }
 
@@ -50,6 +60,7 @@ const Wrapper = styled.li`
     .headline {
       ${({ theme }) => theme.maxlines(2)};
       font-size: 15px;
+      margin-bottom: 2px;
     }
 
     .info {

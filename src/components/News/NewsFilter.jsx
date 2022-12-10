@@ -31,14 +31,13 @@ export default NewsFilter;
 
 const Wrapper = styled.label`
   display: flex;
-  justify-content: end;
   align-items: center;
   margin-bottom: 10px;
 `;
 
 const FilterSelect = styled.select`
-  width: 80px;
-  font-size: 12px;
+  width: 100px;
+  font-size: 14px;
   option {
     color: black;
   }

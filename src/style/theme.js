@@ -1,5 +1,6 @@
 const color = {
-  primary: "#802045",
+  primary: "#8d1b3d",
+  lightprimary: "#f8f0f2",
   lightwhite: "rgba(255, 255, 255, 0.5)",
   gray: "#9A9EA1",
   yellow: "#FEC310",
