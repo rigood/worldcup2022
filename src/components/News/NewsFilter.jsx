@@ -38,6 +38,7 @@ const Wrapper = styled.label`
 const FilterSelect = styled.select`
   width: 100px;
   font-size: 14px;
+  color: ${({ theme }) => theme.color.gray};
   option {
     color: black;
   }
