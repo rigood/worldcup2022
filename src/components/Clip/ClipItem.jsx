@@ -62,6 +62,12 @@ const Wrapper = styled.li`
       letter-spacing: -0.2px;
     }
   }
+
+  @media (hover: hover) {
+    .title:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 const Thumbnail = styled.div`

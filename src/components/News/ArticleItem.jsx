@@ -69,4 +69,10 @@ const Wrapper = styled.li`
       letter-spacing: -0.2px;
     }
   }
+
+  @media (hover: hover) {
+    .headline:hover {
+      text-decoration: underline;
+    }
+  }
 `;
