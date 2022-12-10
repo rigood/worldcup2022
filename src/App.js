@@ -48,6 +48,7 @@ const Wrapper = styled.div`
   min-height: 100vh;
   margin: 0 auto;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  position: relative;
 `;
 
 const Header = styled.nav`

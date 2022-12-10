@@ -40,7 +40,7 @@ function News() {
           <FontAwesomeIcon icon={faSoccerBall} />
           <h2>스포츠 뉴스</h2>
         </TitleContainer>
-        <NewsFilter articles={articles} setFilter={setFilter} />
+        <NewsFilter articles={articles} filter={filter} setFilter={setFilter} />
       </TitleFilterContainer>
 
       <ArticleList>
@@ -53,7 +53,9 @@ function News() {
       {error && <ErrorElement />}
 
       {index < filteredArticles?.length && (
-        <Button type="button" label="더보기" onClick={handleLoad} />
+        <ButtonWrapper>
+          <Button type="button" label="더보기" onClick={handleLoad} />
+        </ButtonWrapper>
       )}
     </>
   );
@@ -70,6 +72,12 @@ const TitleFilterContainer = styled.div`
 const ArticleList = styled.ul`
   display: flex;
   flex-direction: column;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
 `;
 
 // 네이버 뉴스 api 요청시 cors 에러 발생 -> package.json에서 proxy 설정

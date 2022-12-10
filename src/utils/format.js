@@ -12,3 +12,15 @@ export function formatSeconds(totalSeconds) {
     .filter((num, idx) => num !== "00" || idx > 0)
     .join(":");
 }
+
+export function formatFilterName(filter) {
+  if (filter === "all") {
+    return "언론사 전체";
+  } else {
+    if (filter.length >= 10) {
+      return filter.substr(0, 10) + "...";
+    } else {
+      return filter;
+    }
+  }
+}
