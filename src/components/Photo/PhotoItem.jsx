@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 import styled from "styled-components";
+import { translateIntoKorean } from "../../utils/translateIntoKorean";
 import { formatDate } from "../../utils/format";
 
 function PhotoItem({ image }, ref) {
@@ -7,8 +8,6 @@ function PhotoItem({ image }, ref) {
     collection,
     thumbnail_url,
     image_url,
-    width,
-    height,
     display_sitename,
     doc_url,
     datetime,
@@ -23,7 +22,10 @@ function PhotoItem({ image }, ref) {
           title="새 탭에서 이미지 열기"
           rel="noopener noreferrer"
         >
-          <img src={image_url} alt="검색 결과 이미지" />
+          <img
+            src={collection === "cafe" ? thumbnail_url : image_url}
+            alt="검색 결과 이미지"
+          />
         </a>
       </div>
       <div className="source">
@@ -33,10 +35,12 @@ function PhotoItem({ image }, ref) {
           title="해당 사이트로 이동합니다."
           rel="noopener noreferrer"
         >
-          [{collection}] {display_sitename}
+          [{translateIntoKorean(collection)}] {display_sitename}
         </a>
       </div>
-      <div className="datetime">{formatDate(datetime)}</div>
+      <div ref={ref} className="datetime">
+        {formatDate(datetime)}
+      </div>
     </Wrapper>
   );
 }
