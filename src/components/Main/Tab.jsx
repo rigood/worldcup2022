@@ -2,7 +2,6 @@ import { useRef } from "react";
 import styled from "styled-components";
 import useSlider from "../../hook/useSlider";
 import { TAB_ITEMS } from "../../data/tab-items";
-import color from "../../style/color";
 import { checkLocalhost } from "./../../utils/checkLocalhost";
 
 function Tab({ tabIndex, setTabIndex }) {
@@ -59,7 +58,7 @@ const TabContainer = styled.ul`
   display: flex;
   column-gap: 20px;
   padding: 10px 10px 0 10px;
-  background-color: ${color.primary};
+  background-color: ${({ theme }) => theme.color.primary};
   color: white;
   font-size: 16px;
   overflow-x: scroll;

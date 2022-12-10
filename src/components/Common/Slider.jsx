@@ -5,7 +5,6 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import color from "../../style/color";
 
 function Slider({ children, slideWidth }) {
   const [isDrag, setIsDrag] = useState(false);
@@ -90,9 +89,9 @@ const SliderButton = styled(FontAwesomeIcon)`
   width: 20px;
   height: 20px;
   padding: 8px;
-  color: ${color.primary};
+  color: ${({ theme }) => theme.color.primary};
   background-color: white;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: ${({ theme }) => theme.shadow.boxShadow};
   border-radius: 50%;
   cursor: pointer;
 `;

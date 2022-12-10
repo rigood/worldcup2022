@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { ThemeProvider } from "styled-components";
 import styled from "styled-components";
+import theme from "./style/theme";
 import GlobalStyles from "./style/GlobalStyle";
 import Header from "./components/Main/Header";
 import Tab from "./components/Main/Tab";
@@ -15,23 +17,25 @@ function App() {
 
   return (
     <>
-      <GlobalStyles />
-      <MainLayout>
-        <MainContainer>
-          <Header />
-          <Tab tabIndex={tabIndex} setTabIndex={setTabIndex} />
-          <TabContentsWrapper>
-            {tabIndex === 0 && <Home />}
-            {/* {tabIndex === 1 && <Matches />} */}
-            {tabIndex === 2 && <Players />}
-            {tabIndex === 3 && <Clips />}
-            {tabIndex === 4 && <Photos />}
-            {tabIndex === 5 && <MY />}
-            {/* {tabIndex === 6 && <Store />} */}
-            {tabIndex === 7 && <News />}
-          </TabContentsWrapper>
-        </MainContainer>
-      </MainLayout>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <MainLayout>
+          <MainContainer>
+            <Header />
+            <Tab tabIndex={tabIndex} setTabIndex={setTabIndex} />
+            <TabContentsWrapper>
+              {tabIndex === 0 && <Home />}
+              {/* {tabIndex === 1 && <Matches />} */}
+              {tabIndex === 2 && <Players />}
+              {tabIndex === 3 && <Clips />}
+              {tabIndex === 4 && <Photos />}
+              {tabIndex === 5 && <MY />}
+              {/* {tabIndex === 6 && <Store />} */}
+              {tabIndex === 7 && <News />}
+            </TabContentsWrapper>
+          </MainContainer>
+        </MainLayout>
+      </ThemeProvider>
     </>
   );
 }

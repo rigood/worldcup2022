@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import color from "../style/color";
 import { KOREA_PLAYERS } from "../data/korea-players";
 import { ReactComponent as PlayerIcon } from "../svg/player.svg";
 import Slider from "../components/Common/Slider";
@@ -34,6 +33,6 @@ const TitleContainer = styled.div`
   h1 {
     margin-left: 6px;
     font-size: 15px;
-    color: ${color.primary};
+    color: ${({ theme }) => theme.color.primary};
   }
 `;

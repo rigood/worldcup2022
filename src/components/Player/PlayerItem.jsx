@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import color from "../../style/color";
 
 function PlayerItem({ player }) {
   return (
@@ -46,7 +45,7 @@ const Profile = styled.div`
   width: 360px;
   height: 400px;
   border-radius: 20px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: ${({ theme }) => theme.shadow.boxShadow2};
   background-size: cover;
   background-position: center;
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255, 1)),
@@ -65,7 +64,7 @@ const ProfileInfo = styled.div`
   .name {
     font-size: 32px;
     font-weight: 700;
-    color: ${color.primary};
+    color: ${({ theme }) => theme.color.primary};
     margin-bottom: 8px;
   }
 `;
@@ -81,7 +80,7 @@ const Number = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-color: ${color.primary};
+  background-color: ${({ theme }) => theme.color.primary};
   color: white;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
     rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
@@ -94,6 +93,6 @@ const InfoGrid = styled.div`
   column-gap: 10px;
   row-gap: 10px;
   label {
-    color: ${color.blue};
+    color: ${({ theme }) => theme.color.blue};
   }
 `;

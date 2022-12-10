@@ -1,7 +1,5 @@
-import { useState, useRef } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import color from "./../style/color";
 import ProfileUpload from "./../components/MY/ProfileUpload";
 import ProfileInfo from "./../components/MY/ProfileInfo";
 

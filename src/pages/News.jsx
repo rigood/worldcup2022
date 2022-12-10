@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
 import useFetch from "../hook/useFetch";
-import color from "../style/color";
 import NewsFilter from "../components/News/NewsFilter";
 import ArticleItem from "./../components/News/ArticleItem";
 import NewsSkeleton from "./../components/News/NewsSkeleton";

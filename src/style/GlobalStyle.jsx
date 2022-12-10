@@ -24,6 +24,7 @@ ${reset}
 
 body{
   font-family: 'Pretendard-Regular';
+  line-height: 1.3;
   &::-webkit-scrollbar{
     display: none
   }

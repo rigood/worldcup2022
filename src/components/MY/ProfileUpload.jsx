@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import styled from "styled-components";
-import color from "../../style/color";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { ReactComponent as ProfileIcon } from "../../svg/profile.svg";
@@ -106,7 +105,7 @@ const TitleContainer = styled.div`
   h1 {
     margin-left: 6px;
     font-size: 15px;
-    color: ${color.primary};
+    color: ${({ theme }) => theme.color.primary};
   }
 `;
 
@@ -126,8 +125,8 @@ const UploadContainer = styled.div`
   margin: 30px 0;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  color: ${color.blue};
+  box-shadow: ${({ theme }) => theme.shadow.boxShadow2};
+  color: ${({ theme }) => theme.color.blue};
   cursor: pointer;
   &.active {
     opacity: 0.5;

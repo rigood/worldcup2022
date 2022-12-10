@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { formatDate } from "../../utils/format";
-import color from "../../style/color";
-import maxLines from "../../style/maxLines";
 
 const DEFAULT_IMG = "https://via.placeholder.com/100x66?text=WorldCup";
 
@@ -50,14 +48,13 @@ const Wrapper = styled.li`
 
   .rightCol {
     .headline {
-      ${maxLines(2)}
+      ${({ theme }) => theme.maxlines(2)};
       font-size: 15px;
-      margin-bottom: 5px;
     }
 
     .info {
       font-size: 13px;
-      color: ${color.gray};
+      color: ${({ theme }) => theme.color.gray};
       letter-spacing: -0.2px;
     }
   }

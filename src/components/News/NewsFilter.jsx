@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import color from "../../style/color";
 import { ReactComponent as FilterIcon } from "../../svg/filter.svg";
 
 function NewsFilter({ articles, setFilter }) {
@@ -40,7 +39,7 @@ const FilterSelect = styled.select`
   margin-left: 2px;
   width: 100px;
   font-size: 15px;
-  color: ${color.primary};
+  color: ${({ theme }) => theme.color.primary};
 
   option {
     color: black;

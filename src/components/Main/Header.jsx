@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import color from "../../style/color";
 import { ReactComponent as Logo } from "../../svg/trophy.svg";
 
 function Header() {
@@ -22,7 +21,7 @@ const Wrapper = styled.section`
   padding: 20px 20px 10px;
   display: flex;
   justify-content: space-between;
-  background-color: ${color.primary};
+  background-color: ${({ theme }) => theme.color.primary};
 `;
 
 const Col = styled.div``;
