@@ -1,13 +1,16 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useDebounce from "../hook/useDebounce";
 import useKakaoSearch from "../hook/useKakaoSearch";
 import useInfiniteScroll from "../hook/useInfiniteScroll";
+import TitleContainer from "../components/Common/TitleContainer";
 import SearchForm from "./../components/Common/Search/SearchForm";
 import PopularSearch from "./../components/Common/Search/PopularSearch";
 import RadioButtons from "./../components/Common/Search/RadioButtons";
 import PhotoItem from "./../components/Photo/PhotoItem";
 import PhotoSkeleton from "./../components/Photo/PhotoSkeleton";
 import ErrorElement from "./../components/Common/ErrorElement";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
 
 function Photos() {
   const [query, setQuery] = useState("월드컵");
@@ -26,6 +29,11 @@ function Photos() {
 
   return (
     <>
+      <TitleContainer>
+        <FontAwesomeIcon icon={faImage} />
+        <h2>이미지 검색</h2>
+      </TitleContainer>
+
       <SearchForm query={query} setQuery={setQuery} setPage={setPage} />
       <PopularSearch setQuery={setQuery} setPage={setPage} />
       <RadioButtons setSort={setSort} />

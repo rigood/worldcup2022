@@ -3,17 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProfileUpload from "./../components/MY/ProfileUpload";
 import ProfileInfo from "./../components/MY/ProfileInfo";
 
-// import { ReactComponent as Logo } from "../svg/trophy.svg";
-
 function MY() {
   return (
-    <Wrapper>
+    <>
       <ProfileUpload />
       <ProfileInfo />
-    </Wrapper>
+    </>
   );
 }
 
 export default MY;
-
-const Wrapper = styled.div``;

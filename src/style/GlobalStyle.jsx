@@ -53,6 +53,7 @@ select{
   outline: none;
   font-family: inherit;
   font-size: inherit;
+  color: inherit;
 }
 
 ul, li{

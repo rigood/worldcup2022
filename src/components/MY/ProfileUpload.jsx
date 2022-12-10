@@ -1,10 +1,10 @@
 import { useState, useRef } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { ReactComponent as ProfileIcon } from "../../svg/profile.svg";
 import useLocalStorage from "../../hook/useLocalStorage";
+import TitleContainer from "../Common/TitleContainer";
 import Button from "../Common/Button";
+import { faUser, faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 function ProfileUpload() {
   const [active, setActive] = useState(false);
@@ -57,12 +57,13 @@ function ProfileUpload() {
   };
 
   return (
-    <Wrapper>
+    <>
       <TitleContainer>
-        <ProfileIcon />
-        <h1>프로필 사진 업로드</h1>
+        <FontAwesomeIcon icon={faUser} />
+        <h2>프로필 업로드</h2>
       </TitleContainer>
-      <ProfileContainer>
+
+      <ProfileUploadWrapper>
         <UploadContainer
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
@@ -89,27 +90,14 @@ function ProfileUpload() {
           />
           <Button onClick={() => setImgUrl(false)} label="사진 초기화" />
         </ButtonContainer>
-      </ProfileContainer>
-    </Wrapper>
+      </ProfileUploadWrapper>
+    </>
   );
 }
 
 export default ProfileUpload;
 
-const Wrapper = styled.div``;
-
-const TitleContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  h1 {
-    margin-left: 6px;
-    font-size: 15px;
-    color: ${({ theme }) => theme.color.primary};
-  }
-`;
-
-const ProfileContainer = styled.div`
+const ProfileUploadWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

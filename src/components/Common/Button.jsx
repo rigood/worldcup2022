@@ -1,8 +1,13 @@
 import styled from "styled-components";
 
-function Button({ label, children, onClick, textColor }) {
+function Button({ type, label, onClick, fontSize, textColor, children }) {
   return (
-    <Wrapper onClick={onClick} color={textColor}>
+    <Wrapper
+      type={type}
+      onClick={onClick}
+      fontSize={fontSize}
+      textColor={textColor}
+    >
       {label || children}
     </Wrapper>
   );
@@ -10,9 +15,12 @@ function Button({ label, children, onClick, textColor }) {
 
 export default Button;
 
-const Wrapper = styled.button`
-  margin-bottom: 20px;
+const Wrapper = styled.button.attrs((props) => ({
+  type: props.type,
+}))`
+  width: fit-content;
   padding: 10px 30px;
+  font-size: ${({ fontSize }) => fontSize || "16px"};
   color: ${({ textColor, theme }) =>
     textColor ? textColor : theme.color.primary};
   box-shadow: ${({ theme }) => theme.shadow.boxShadow};

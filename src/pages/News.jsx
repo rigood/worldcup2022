@@ -1,11 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useFetch from "../hook/useFetch";
 import NewsFilter from "../components/News/NewsFilter";
 import ArticleItem from "./../components/News/ArticleItem";
 import NewsSkeleton from "./../components/News/NewsSkeleton";
 import ErrorElement from "../components/Common/ErrorElement";
 import Button from "./../components/Common/Button";
+import TitleContainer from "../components/Common/TitleContainer";
+import { faNewspaper } from "@fortawesome/free-solid-svg-icons";
 
 const BASE_URL =
   "https://newsapi.org/v2/top-headlines?country=kr&category=sports&pageSize=100";
@@ -32,6 +35,11 @@ function News() {
 
   return (
     <>
+      <TitleContainer>
+        <FontAwesomeIcon icon={faNewspaper} />
+        <h2>스포츠 뉴스</h2>
+      </TitleContainer>
+
       <NewsFilter articles={articles} setFilter={setFilter} />
 
       <ArticleList>
@@ -44,7 +52,7 @@ function News() {
       {error && <ErrorElement />}
 
       {index < filteredArticles?.length && (
-        <Button onClick={handleLoad} label="더보기" />
+        <Button type="button" label="더보기" onClick={handleLoad} />
       )}
     </>
   );

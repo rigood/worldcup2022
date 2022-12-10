@@ -32,7 +32,7 @@ const Text = styled.h1`
   margin-bottom: 5px;
 `;
 
-const SubText = styled.h2`
+const SubText = styled.span`
   font-size: 12px;
   color: ${({ theme }) => theme.color.lightwhite};
 `;

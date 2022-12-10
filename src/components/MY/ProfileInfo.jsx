@@ -1,9 +1,22 @@
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TitleContainer from "../Common/TitleContainer";
+import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
+import Button from "./../Common/Button";
 
 function ProfileInfo() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <Wrapper>
-      <FormContainer>
+    <>
+      <TitleContainer>
+        <FontAwesomeIcon icon={faAddressCard} />
+        <h2>프로필 정보 입력</h2>
+      </TitleContainer>
+
+      <FormContainer onSubmit={handleSubmit}>
         <label htmlFor="name">이름</label>
         <input type="text" id="name" name="name" />
 
@@ -16,19 +29,13 @@ function ProfileInfo() {
         <label htmlFor="msg">하고 싶은 말</label>
         <input type="text" id="msg" name="msg" />
 
-        <button type="submit">제출</button>
+        <Button type="submit" label="제출" />
       </FormContainer>
-    </Wrapper>
+    </>
   );
 }
 
 export default ProfileInfo;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
 const FormContainer = styled.form`
   display: flex;

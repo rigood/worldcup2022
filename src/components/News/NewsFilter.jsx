@@ -31,16 +31,14 @@ export default NewsFilter;
 
 const Wrapper = styled.label`
   display: flex;
+  justify-content: end;
   align-items: center;
   margin-bottom: 10px;
 `;
 
 const FilterSelect = styled.select`
-  margin-left: 2px;
-  width: 100px;
-  font-size: 15px;
-  color: ${({ theme }) => theme.color.primary};
-
+  width: 80px;
+  font-size: 12px;
   option {
     color: black;
   }
