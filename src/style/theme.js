@@ -3,6 +3,7 @@ const color = {
   lightprimary: "#f8f0f2",
   lightwhite: "rgba(255, 255, 255, 0.5)",
   gray: "#9A9EA1",
+  lightgray: "#eee",
   yellow: "#FEC310",
   skyblue: "#49BCE3",
   blue: "#1077C3",

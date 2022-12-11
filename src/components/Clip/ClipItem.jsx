@@ -1,10 +1,9 @@
-import { forwardRef } from "react";
 import styled from "styled-components";
 import { formatDate, formatSeconds } from "../../utils/format";
 
 const DEFAULT_IMG = "https://via.placeholder.com/100x66?text=WorldCup";
 
-function ClipItem({ clip }, ref) {
+function ClipItem({ clip }) {
   const { author, datetime, play_time, thumbnail, title, url } = clip;
   return (
     <Wrapper>
@@ -32,15 +31,13 @@ function ClipItem({ clip }, ref) {
           </a>
         </h2>
         <div className="author">{author}</div>
-        <div ref={ref} className="datetime">
-          {formatDate(datetime)}
-        </div>
+        <div className="datetime">{formatDate(datetime)}</div>
       </div>
     </Wrapper>
   );
 }
 
-export default forwardRef(ClipItem);
+export default ClipItem;
 
 const Wrapper = styled.li`
   padding: 15px 0;

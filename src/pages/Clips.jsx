@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useDebounce from "../hook/useDebounce";
@@ -12,9 +12,10 @@ import ClipItem from "./../components/Clip/ClipItem";
 import ClipSkeleton from "./../components/Clip/ClipSkeleton";
 import ErrorElement from "./../components/Common/ErrorElement";
 import { faVideo } from "@fortawesome/free-solid-svg-icons";
+import Line from "../components/Common/Line";
 
 function Clips() {
-  const PAGE_SIZE = 15;
+  const PAGE_SIZE = 10;
   const [query, setQuery] = useState("월드컵");
   const debouncedQuery = useDebounce(query, 500);
   const [sort, setSort] = useState("accuracy");
@@ -45,14 +46,20 @@ function Clips() {
 
       <ul>
         {data?.map((clip, index) => {
-          if (data.length === index + 1) {
-            return <ClipItem ref={lastClipRef} key={index} clip={clip} />;
+          if (index % PAGE_SIZE === PAGE_SIZE - 1) {
+            return (
+              <React.Fragment key={index}>
+                <ClipItem clip={clip} />
+                <Line />
+              </React.Fragment>
+            );
           } else {
             return <ClipItem key={index} clip={clip} />;
           }
         })}
       </ul>
 
+      {!isLoading && !error ? <div ref={lastClipRef} /> : null}
       {isLoading && <ClipSkeleton count={PAGE_SIZE} />}
       {error && <ErrorElement />}
     </>
