@@ -44,6 +44,7 @@ button{
   cursor: pointer;
 }
 
+
 input, input::placeholder{
   font-family: inherit;
   font-size: inherit;

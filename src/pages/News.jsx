@@ -75,8 +75,7 @@ const ArticleList = styled.ul`
 `;
 
 const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+  text-align: center;
   margin: 10px 0;
 `;
 
