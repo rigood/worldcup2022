@@ -7,8 +7,6 @@ import PlayerItem from "./../components/Player/PlayerItem";
 import { faTrophy } from "@fortawesome/free-solid-svg-icons";
 
 function Players() {
-  const SLIDE_WIDTH = 370;
-
   return (
     <>
       <TitleContainer>
@@ -16,7 +14,7 @@ function Players() {
         <h2>대한민국 국가대표</h2>
       </TitleContainer>
 
-      <Slider slideWidth={SLIDE_WIDTH}>
+      <Slider>
         {KOREA_PLAYERS.map((player) => {
           return <PlayerItem key={player.id} player={player} />;
         })}

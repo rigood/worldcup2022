@@ -6,22 +6,79 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-function Slider({ children, slideWidth }) {
-  const [isDrag, setIsDrag] = useState(false);
+function Slider({ children }) {
   const scrollRef = useRef(null);
   const leftButtonRef = useRef(null);
   const rightButtonRef = useRef(null);
 
-  const handleButtonDisplay = (scrollLeftWidth) => {
+  const isDragStart = useRef(false);
+  const isDragging = useRef(false);
+
+  const prevPageX = useRef(0);
+  const positionDiff = useRef(0);
+
+  const handleDragStart = (e) => {
+    isDragStart.current = true;
+    prevPageX.current = e.pageX;
+  };
+
+  const handleDragMove = (e) => {
+    if (!isDragStart.current) return;
+
+    e.preventDefault();
+    isDragging.current = true;
+    scrollRef.current.classList.add("dragging");
+
+    scrollRef.current.scrollLeft -= e.movementX;
+    positionDiff.current = e.pageX - prevPageX.current;
+  };
+
+  const handleDragEnd = (e) => {
+    isDragStart.current = false;
+    scrollRef.current.classList.remove("dragging");
+
+    if (!isDragging.current) return;
+    isDragging.current = false;
+
+    autoSlide();
+    handleButtonShowHide(scrollRef.current.scrollLeft);
+  };
+
+  const handleButtonShowHide = (scrollLeftValue) => {
     const { scrollWidth, clientWidth } = scrollRef.current;
     const maxScrollableWidth = scrollWidth - clientWidth;
 
-    leftButtonRef.current.style.display = scrollLeftWidth > 0 ? "flex" : "none";
+    leftButtonRef.current.style.display = scrollLeftValue > 0 ? "flex" : "none";
     rightButtonRef.current.style.display =
-      maxScrollableWidth - scrollLeftWidth > 1 ? "flex" : "none";
+      maxScrollableWidth - scrollLeftValue > 1 ? "flex" : "none";
+  };
+
+  const autoSlide = () => {
+    const positionDiffAbs = Math.abs(positionDiff.current);
+    const slideWidth = scrollRef.current.clientWidth;
+    const valDiff = slideWidth - positionDiffAbs;
+
+    // 오른쪽으로 스크롤한 경우
+    if (positionDiff.current < 0) {
+      if (positionDiffAbs > slideWidth / 4) {
+        scrollRef.current.scrollLeft += valDiff;
+      } else {
+        scrollRef.current.scrollLeft -= positionDiffAbs;
+      }
+    }
+
+    // 왼쪽으로 스크롤한 경우
+    if (positionDiff.current > 0) {
+      if (positionDiffAbs > slideWidth / 4) {
+        scrollRef.current.scrollLeft -= valDiff;
+      } else {
+        scrollRef.current.scrollLeft += positionDiffAbs;
+      }
+    }
   };
 
   const handleButtonClick = (direction) => {
+    const slideWidth = scrollRef.current.clientWidth;
     let scrollLeftWidth;
 
     if (direction === "left") {
@@ -30,22 +87,7 @@ function Slider({ children, slideWidth }) {
       scrollLeftWidth = scrollRef.current.scrollLeft += slideWidth;
     }
 
-    handleButtonDisplay(scrollLeftWidth);
-  };
-
-  const handleDragStart = (e) => {
-    e.preventDefault();
-    setIsDrag(true);
-  };
-
-  const handleDragMove = (e) => {
-    if (!isDrag) return;
-    scrollRef.current.scrollLeft -= e.movementX;
-    handleButtonDisplay(scrollRef.current.scrollLeft);
-  };
-
-  const handleDragEnd = (e) => {
-    setIsDrag(false);
+    handleButtonShowHide(scrollLeftWidth);
   };
 
   return (
@@ -58,10 +100,9 @@ function Slider({ children, slideWidth }) {
       <SliderWrapper
         ref={scrollRef}
         onMouseDown={handleDragStart}
-        onMouseMove={isDrag ? handleDragMove : null}
+        onMouseMove={handleDragMove}
         onMouseUp={handleDragEnd}
         onMouseLeave={handleDragEnd}
-        className={isDrag ? "dragging" : null}
       >
         {children}
       </SliderWrapper>
@@ -107,11 +148,10 @@ const RightButton = styled(SliderButton)`
 
 const SliderWrapper = styled.ul`
   display: flex;
-  overflow-x: hidden;
+  overflow-x: scroll;
   scroll-behavior: smooth;
 
   &.dragging {
     scroll-behavior: auto;
-    cursor: grab;
   }
 `;

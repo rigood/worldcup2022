@@ -71,7 +71,6 @@ const TabContainer = styled.ul`
 
   &.dragging {
     scroll-behavior: auto;
-    cursor: grab;
   }
 
   &.dragging ${TabItem} {
