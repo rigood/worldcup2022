@@ -1,13 +1,15 @@
 import { useState } from "react";
 import styled from "styled-components";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useLocalStorage from "../../hook/useLocalStorage";
 import TitleContainer from "../Common/TitleContainer";
-import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
-import Button from "./../Common/Button";
 import ProfileInput from "./ProfileInput";
+import Button from "./../Common/Button";
+import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 
 function ProfileInfo() {
+  const [profile, setProfile] = useLocalStorage("profile", {});
+
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -22,6 +24,14 @@ function ProfileInfo() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setProfile(values);
+    setValues({
+      nickname: "",
+      email: "",
+      birthday: "",
+      password: "",
+      confirmPassword: "",
+    });
   };
 
   return (
