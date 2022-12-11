@@ -20,12 +20,13 @@ function Photos() {
   const [sort, setSort] = useState("accuracy");
   const [page, setPage] = useState(1);
 
-  const {
-    data: images,
-    isLoading,
-    error,
-    hasMorePage,
-  } = useKakaoSearch("image", debouncedQuery, sort, page, PAGE_SIZE);
+  const { data, isLoading, error, hasMorePage } = useKakaoSearch(
+    "image",
+    debouncedQuery,
+    sort,
+    page,
+    PAGE_SIZE
+  );
 
   const lastPhotoRef = useInfiniteScroll(isLoading, hasMorePage, setPage);
 
@@ -42,13 +43,13 @@ function Photos() {
       <SearchForm query={query} setQuery={setQuery} setPage={setPage} />
       <PopularSearch setQuery={setQuery} setPage={setPage} />
 
-      {images.length ? (
+      {data.length ? (
         <PhotoGrid>
-          {images?.map((image, index) => {
-            if (images.length === index + 1) {
-              return <PhotoItem ref={lastPhotoRef} key={index} image={image} />;
+          {data?.map((photo, index) => {
+            if (data.length === index + 1) {
+              return <PhotoItem ref={lastPhotoRef} key={index} photo={photo} />;
             } else {
-              return <PhotoItem key={index} image={image} />;
+              return <PhotoItem key={index} photo={photo} />;
             }
           })}
         </PhotoGrid>

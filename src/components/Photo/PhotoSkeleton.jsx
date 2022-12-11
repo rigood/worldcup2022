@@ -6,7 +6,7 @@ function PhotoSkeleton({ count }) {
       {Array(count)
         .fill(1)
         .map((card, index) => {
-          return <div key={index} className="skeleton imgThumbnail" />;
+          return <div key={index} className="skeleton photoThumbnail" />;
         })}
     </>
   );

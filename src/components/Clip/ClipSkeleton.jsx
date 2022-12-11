@@ -16,7 +16,7 @@ function ClipSkeleton({ count }) {
               }}
             >
               <div>
-                <div className="skeleton videoThumbnail" />
+                <div className="skeleton clipThumbnail" />
               </div>
               <div>
                 <div className="skeleton text" />

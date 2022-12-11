@@ -4,8 +4,8 @@ import { formatDate, formatSeconds } from "../../utils/format";
 
 const DEFAULT_IMG = "https://via.placeholder.com/100x66?text=WorldCup";
 
-function ClipItem({ video }, ref) {
-  const { author, datetime, play_time, thumbnail, title, url } = video;
+function ClipItem({ clip }, ref) {
+  const { author, datetime, play_time, thumbnail, title, url } = clip;
   return (
     <Wrapper>
       <div className="leftCol">

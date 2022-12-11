@@ -18,12 +18,12 @@
   height: 66px;
 }
 
-.skeleton.videoThumbnail {
+.skeleton.clipThumbnail {
   width: 120px;
   height: 68px;
 }
 
-.skeleton.imgThumbnail {
+.skeleton.photoThumbnail {
   width: 100%;
   height: 100px;
 }

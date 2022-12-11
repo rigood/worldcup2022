@@ -3,7 +3,7 @@ import { formatDate } from "../../utils/format";
 
 const DEFAULT_IMG = "https://via.placeholder.com/100x66?text=WorldCup";
 
-function ArticleItem({ article }) {
+function NewsItem({ article }) {
   const { title, publishedAt, url, urlToImage } = article;
   const headline = title?.split(" - ")[0];
   const source = title?.split(" - ")[1];
@@ -39,7 +39,7 @@ function ArticleItem({ article }) {
   );
 }
 
-export default ArticleItem;
+export default NewsItem;
 
 const Wrapper = styled.li`
   padding: 15px 0;

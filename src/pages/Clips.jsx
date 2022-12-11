@@ -20,12 +20,13 @@ function Clips() {
   const [sort, setSort] = useState("accuracy");
   const [page, setPage] = useState(1);
 
-  const {
-    data: videos,
-    isLoading,
-    error,
-    hasMorePage,
-  } = useKakaoSearch("vclip", debouncedQuery, sort, page, PAGE_SIZE);
+  const { data, isLoading, error, hasMorePage } = useKakaoSearch(
+    "vclip",
+    debouncedQuery,
+    sort,
+    page,
+    PAGE_SIZE
+  );
 
   const lastClipRef = useInfiniteScroll(isLoading, hasMorePage, setPage);
 
@@ -43,11 +44,11 @@ function Clips() {
       <PopularSearch setQuery={setQuery} setPage={setPage} />
 
       <ul>
-        {videos?.map((video, index) => {
-          if (videos.length === index + 1) {
-            return <ClipItem ref={lastClipRef} key={index} video={video} />;
+        {data?.map((clip, index) => {
+          if (data.length === index + 1) {
+            return <ClipItem ref={lastClipRef} key={index} clip={clip} />;
           } else {
-            return <ClipItem key={index} video={video} />;
+            return <ClipItem key={index} clip={clip} />;
           }
         })}
       </ul>

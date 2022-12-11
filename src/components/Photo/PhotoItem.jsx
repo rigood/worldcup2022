@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { translateIntoKorean } from "../../utils/translateIntoKorean";
 import { formatDate } from "../../utils/format";
 
-function PhotoItem({ image }, ref) {
+function PhotoItem({ photo }, ref) {
   const {
     collection,
     thumbnail_url,
@@ -11,7 +11,7 @@ function PhotoItem({ image }, ref) {
     display_sitename,
     doc_url,
     datetime,
-  } = image;
+  } = photo;
 
   return (
     <Wrapper>

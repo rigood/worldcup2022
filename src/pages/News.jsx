@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useFetch from "../hook/useFetch";
 import NewsFilter from "../components/News/NewsFilter";
-import ArticleItem from "./../components/News/ArticleItem";
+import NewsItem from "../components/News/NewsItem";
 import NewsSkeleton from "./../components/News/NewsSkeleton";
 import ErrorElement from "../components/Common/ErrorElement";
 import Button from "./../components/Common/Button";
@@ -40,12 +40,12 @@ function News() {
           <FontAwesomeIcon icon={faSoccerBall} />
           <h2>스포츠 뉴스</h2>
         </TitleContainer>
-        <NewsFilter articles={articles} filter={filter} setFilter={setFilter} />
+        <NewsFilter filter={filter} setFilter={setFilter} articles={articles} />
       </TitleFilterContainer>
 
       <ArticleList>
         {filteredArticles?.slice(0, index).map((article, index) => {
-          return <ArticleItem key={index} article={article} />;
+          return <NewsItem key={index} article={article} />;
         })}
       </ArticleList>
 
