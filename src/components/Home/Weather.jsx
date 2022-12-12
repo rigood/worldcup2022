@@ -34,8 +34,8 @@ function Weather() {
         <h2>How's the weather?</h2>
       </TitleContainer>
       <WeatherContainer>
-        <WeatherItem country="카타르" data={qatarData} />
-        <WeatherItem country="대한민국" data={koreaData} />
+        <WeatherItem koName="카타르" enName="qatar" data={qatarData} />
+        <WeatherItem koName="대한민국" enName="korea" data={koreaData} />
       </WeatherContainer>
     </>
   );

@@ -2,18 +2,21 @@ import styled from "styled-components";
 import { getIconUrl } from "../../utils/getIconUrl";
 
 function WeatherItem(props) {
-  const { country, data } = props;
+  const { koName, enName, data } = props;
 
   return (
     <Wrapper>
-      <div className="country">{country}</div>
-      <img src={getIconUrl(data.weather[0].icon)} />
+      <div className="country">
+        <img src={`/assets/${enName}-flag.png`} />
+        <span className="name">{koName}</span>
+      </div>
+      <img src={getIconUrl(data?.weather?.[0]?.icon)} />
       <div className="temp">
-        <div className="current">{data.main?.temp.toFixed(1)}°</div>
+        <div className="current">{data?.main?.temp?.toFixed(1)}°</div>
         <div className="minmax">
-          <span className="min">{data.main?.temp_min.toFixed()}°</span>
+          <span className="min">{data?.main?.temp_min?.toFixed()}°</span>
           <span className="line">/</span>
-          <span className="max">{data.main?.temp_max.toFixed()}°</span>
+          <span className="max">{data?.main?.temp_max?.toFixed()}°</span>
         </div>
       </div>
     </Wrapper>
@@ -32,7 +35,14 @@ const Wrapper = styled.div`
   .country {
     font-size: 18px;
     font-family: "GmarketSansMedium";
+    img {
+      width: 24px;
+      margin-right: 7.5px;
+      position: relative;
+      bottom: -5px;
+    }
   }
+
   .img {
     margin-bottom: 10px;
   }
