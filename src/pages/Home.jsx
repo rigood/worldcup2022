@@ -1,5 +1,12 @@
+import styled from "styled-components";
+import Time from "../components/Home/Time";
+
 function Home() {
-  return <div>Home</div>;
+  return (
+    <>
+      <Time />
+    </>
+  );
 }
 
 export default Home;
