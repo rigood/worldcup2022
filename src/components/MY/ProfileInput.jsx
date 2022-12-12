@@ -12,15 +12,7 @@ function ProfileInput(props) {
   return (
     <Wrapper>
       <label>{label}</label>
-      <input
-        {...inputProps}
-        onChange={onChange}
-        onBlur={handleFocus}
-        onFocus={() =>
-          inputProps.name === "confirmPassword" && setFocused(true)
-        }
-        focused={focused.toString()}
-      />
+      <input {...inputProps} onChange={onChange} onBlur={handleFocus} />
       <span>{errorMsg}</span>
     </Wrapper>
   );
@@ -55,9 +47,5 @@ const Wrapper = styled.div`
     &::placeholder {
       font-size: 15px;
     }
-  }
-
-  input:invalid[focused="true"] {
-    border: 1px solid red;
   }
 `;

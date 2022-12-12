@@ -8,14 +8,13 @@ import Button from "./../Common/Button";
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 
 function ProfileInfo() {
+  const [isNew, setIsNew] = useState(true);
   const [profile, setProfile] = useLocalStorage("profile", {});
-
   const [values, setValues] = useState({
-    name: "",
-    email: "",
-    birthday: "",
-    password: "",
-    confirmPassword: "",
+    name: "" || profile["name"],
+    email: "" || profile["email"],
+    birthday: "" || profile["birthday"],
+    msg: "" || profile["msg"],
   });
 
   const handleChange = (e) => {
@@ -25,20 +24,16 @@ function ProfileInfo() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setProfile(values);
-    setValues({
-      nickname: "",
-      email: "",
-      birthday: "",
-      password: "",
-      confirmPassword: "",
-    });
+    setIsNew(false);
   };
 
-  return (
+  return isNew ? (
     <>
       <TitleContainer>
         <FontAwesomeIcon icon={faAddressCard} />
-        <h2>프로필 정보 입력</h2>
+        <h2>
+          {Object.entries(profile).length === 0 ? "프로필 입력" : "프로필 수정"}
+        </h2>
       </TitleContainer>
 
       <FormContainer onSubmit={handleSubmit}>
@@ -48,7 +43,7 @@ function ProfileInfo() {
           label="닉네임"
           pattern="^[가-힣a-zA-Z0-9]{2,10}$"
           placeholder="닉네임을 입력해주세요."
-          value={values["nickname"]}
+          value={values["nickname"] || profile["nickname"]}
           onChange={handleChange}
           errorMsg="닉네임은 특수문자 제외 2~10자리로 입력해주세요."
           required={true}
@@ -58,7 +53,7 @@ function ProfileInfo() {
           name="email"
           label="이메일"
           placeholder="이메일을 입력해주세요."
-          value={values["email"]}
+          value={values["email"] || profile["email"]}
           onChange={handleChange}
           errorMsg="이메일 주소가 유효하지 않습니다."
           required={true}
@@ -68,39 +63,33 @@ function ProfileInfo() {
           name="birthday"
           label="생일"
           placeholder="생일을 입력해주세요."
-          value={values["birthday"]}
+          value={values["birthday"] || profile["birthday"]}
           onChange={handleChange}
           errorMsg=""
           required={false}
         />
         <ProfileInput
-          type="password"
-          name="password"
-          label="비밀번호"
-          placeholder="비밀번호를 입력해주세요."
-          value={values["password"]}
-          pattern="^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
+          type="text"
+          name="msg"
+          label="자기소개"
+          placeholder="간단한 자기소개를 입력해주세요."
+          value={values["msg"] || profile["msg"]}
+          errorMsg=""
           onChange={handleChange}
-          errorMsg="비밀번호는 영문·숫자·특수문자 포함 8~20자리로 입력해주세요."
-          required={true}
-        />
-        <ProfileInput
-          type="password"
-          name="confirmPassword"
-          label="비밀번호 확인"
-          placeholder="비밀번호를 한번 더 입력해주세요."
-          value={values["confirmPassword"]}
-          pattern={values["password"]}
-          onChange={handleChange}
-          errorMsg="비밀번호가 일치하지 않습니다."
-          required={true}
         />
 
         <ButtonWrapper>
-          <Button type="submit" label="제출" />
+          <Button
+            type="submit"
+            label={Object.entries(profile).length === 0 ? "입력" : "수정"}
+          />
         </ButtonWrapper>
       </FormContainer>
     </>
+  ) : (
+    <CompleteMsg>
+      <h1>프로필이 등록되었습니다.</h1>
+    </CompleteMsg>
   );
 }
 
@@ -121,3 +110,5 @@ const ButtonWrapper = styled.div`
   text-align: center;
   margin: 10px 0;
 `;
+
+const CompleteMsg = styled.div``;
