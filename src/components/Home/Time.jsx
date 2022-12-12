@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getLocalDateTime } from "../../utils/getLocalDateTime";
 import TitleContainer from "../Common/TitleContainer";
+import TimeItem from "./TimeItem";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 
 function Time() {
@@ -31,26 +32,8 @@ function Time() {
         <h2>What time is it?</h2>
       </TitleContainer>
       <TimeContainer>
-        <TimeItem>
-          <div className="country">
-            <img src="/assets/qatar-flag.png" />
-            <span>카타르</span>
-          </div>
-          <div className="datetime">
-            <div>{qatarDateTime.date}</div>
-            <strong>{qatarDateTime.time}</strong>
-          </div>
-        </TimeItem>
-        <TimeItem>
-          <div className="country">
-            <img src="/assets/korea-flag.png" />
-            <span>대한민국</span>
-          </div>
-          <div className="datetime">
-            <div>{koreaDateTime.date}</div>
-            <strong>{koreaDateTime.time}</strong>
-          </div>
-        </TimeItem>
+        <TimeItem koName="카타르" enName="qatar" dateTime={qatarDateTime} />
+        <TimeItem koName="대한민국" enName="korea" dateTime={koreaDateTime} />
       </TimeContainer>
     </>
   );
@@ -63,39 +46,4 @@ const TimeContainer = styled.div`
   border-radius: 5px;
   box-shadow: ${({ theme }) => theme.shadow.boxShadow};
   display: flex;
-  flex-direction: column;
-`;
-
-const TimeItem = styled.div`
-  flex: 1;
-  margin: 20px 10%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  .country {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    img {
-      width: 32px;
-      margin-right: 7.5px;
-    }
-    span {
-      font-size: 24px;
-      font-family: "GmarketSansMedium";
-      position: relative;
-      bottom: -2px;
-    }
-  }
-  .datetime {
-    flex: 1;
-    text-align: center;
-    font-size: 16px;
-    font-family: "Pretendard-Regular";
-    strong {
-      color: ${({ theme }) => theme.color.primary};
-      font-size: 18px;
-    }
-  }
 `;

@@ -18,6 +18,11 @@ ${reset}
     font-style: normal;
 }
 
+@font-face {
+  font-family: "digital";
+  src: url("/assets/fonts/LAB_digital.ttf");
+}
+
 *{
     box-sizing: border-box;
 }
