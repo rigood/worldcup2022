@@ -28,10 +28,10 @@ function Weather() {
   const error = qatarError || koreaError;
 
   return (
-    <>
+    <Wrapper>
       <TitleContainer>
         <FontAwesomeIcon icon={faCloudSun} />
-        <h2>How's the weather?</h2>
+        <h2>현재 날씨</h2>
       </TitleContainer>
 
       {!isLoading && !error ? (
@@ -40,11 +40,15 @@ function Weather() {
           <WeatherItem koName="대한민국" enName="korea" data={koreaData} />
         </WeatherContainer>
       ) : null}
-    </>
+    </Wrapper>
   );
 }
 
 export default Weather;
+
+const Wrapper = styled.div`
+  margin-bottom: 20px;
+`;
 
 const WeatherContainer = styled.div`
   width: 100%;

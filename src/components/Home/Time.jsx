@@ -26,20 +26,24 @@ function Time() {
   }, []);
 
   return (
-    <>
+    <Wrapper>
       <TitleContainer>
         <FontAwesomeIcon icon={faClock} />
-        <h2>What time is it?</h2>
+        <h2>현지 시간</h2>
       </TitleContainer>
       <TimeContainer>
         <TimeItem koName="카타르" enName="qatar" dateTime={qatarDateTime} />
         <TimeItem koName="대한민국" enName="korea" dateTime={koreaDateTime} />
       </TimeContainer>
-    </>
+    </Wrapper>
   );
 }
 
 export default Time;
+
+const Wrapper = styled.div`
+  margin-bottom: 20px;
+`;
 
 const TimeContainer = styled.div`
   width: 100%;
