@@ -11,7 +11,7 @@ function ProfileInfo() {
   const [isNew, setIsNew] = useState(true);
   const [profile, setProfile] = useLocalStorage("profile", {});
   const [values, setValues] = useState({
-    name: "" || profile["name"],
+    nickname: "" || profile["nickname"],
     email: "" || profile["email"],
     birthday: "" || profile["birthday"],
     msg: "" || profile["msg"],
@@ -25,6 +25,10 @@ function ProfileInfo() {
     e.preventDefault();
     setProfile(values);
     setIsNew(false);
+  };
+
+  const handleComplete = (e) => {
+    setIsNew(true);
   };
 
   return isNew ? (
@@ -43,7 +47,7 @@ function ProfileInfo() {
           label="닉네임"
           pattern="^[가-힣a-zA-Z0-9]{2,10}$"
           placeholder="닉네임을 입력해주세요."
-          value={values["nickname"] || profile["nickname"]}
+          value={values["nickname"]}
           onChange={handleChange}
           errorMsg="닉네임은 특수문자 제외 2~10자리로 입력해주세요."
           required={true}
@@ -53,7 +57,7 @@ function ProfileInfo() {
           name="email"
           label="이메일"
           placeholder="이메일을 입력해주세요."
-          value={values["email"] || profile["email"]}
+          value={values["email"]}
           onChange={handleChange}
           errorMsg="이메일 주소가 유효하지 않습니다."
           required={true}
@@ -63,7 +67,7 @@ function ProfileInfo() {
           name="birthday"
           label="생일"
           placeholder="생일을 입력해주세요."
-          value={values["birthday"] || profile["birthday"]}
+          value={values["birthday"]}
           onChange={handleChange}
           errorMsg=""
           required={false}
@@ -73,7 +77,7 @@ function ProfileInfo() {
           name="msg"
           label="자기소개"
           placeholder="간단한 자기소개를 입력해주세요."
-          value={values["msg"] || profile["msg"]}
+          value={values["msg"]}
           errorMsg=""
           onChange={handleChange}
         />
@@ -89,6 +93,7 @@ function ProfileInfo() {
   ) : (
     <CompleteMsg>
       <h1>프로필이 등록되었습니다.</h1>
+      <Button type="button" label="프로필 확인" onClick={handleComplete} />
     </CompleteMsg>
   );
 }
