@@ -24,8 +24,8 @@ function Weather() {
     error: koreaError,
   } = useFetch(url + "seoul");
 
-  console.log(qatarData);
-  console.log(koreaData);
+  const isLoading = qatarLoading || koreaLoading;
+  const error = qatarError || koreaError;
 
   return (
     <>
@@ -33,10 +33,13 @@ function Weather() {
         <FontAwesomeIcon icon={faCloudSun} />
         <h2>How's the weather?</h2>
       </TitleContainer>
-      <WeatherContainer>
-        <WeatherItem koName="카타르" enName="qatar" data={qatarData} />
-        <WeatherItem koName="대한민국" enName="korea" data={koreaData} />
-      </WeatherContainer>
+
+      {!isLoading && !error ? (
+        <WeatherContainer>
+          <WeatherItem koName="카타르" enName="qatar" data={qatarData} />
+          <WeatherItem koName="대한민국" enName="korea" data={koreaData} />
+        </WeatherContainer>
+      ) : null}
     </>
   );
 }
