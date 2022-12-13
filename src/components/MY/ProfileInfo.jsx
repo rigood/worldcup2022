@@ -103,6 +103,7 @@ export default ProfileInfo;
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
   label {
     margin-bottom: 5px;
   }
@@ -116,4 +117,10 @@ const ButtonWrapper = styled.div`
   margin: 10px 0;
 `;
 
-const CompleteMsg = styled.div``;
+const CompleteMsg = styled.div`
+  text-align: center;
+  h1 {
+    margin-top: 100px;
+    margin-bottom: 50px;
+  }
+`;

@@ -57,50 +57,44 @@ function ProfileUpload() {
   };
 
   return (
-    <>
+    <Wrapper>
       <TitleContainer>
         <FontAwesomeIcon icon={faUser} />
-        <h2>프로필 업로드</h2>
+        <h2>프로필 사진</h2>
       </TitleContainer>
 
-      <ProfileUploadWrapper>
-        <UploadContainer
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-          onClick={() => inputRef.current.click()}
-          className={active ? "active" : null}
-        >
-          {imgUrl ? (
-            <img src={imgUrl} alt="프로필 사진" />
-          ) : (
-            <div>
-              <div className="upload-icon">
-                <FontAwesomeIcon icon={faCloudArrowUp} />
-              </div>
-              <div className="upload-text">Drag & Drop</div>
+      <UploadContainer
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        onClick={() => inputRef.current.click()}
+        className={active ? "active" : null}
+      >
+        {imgUrl ? (
+          <img src={imgUrl} alt="프로필 사진" />
+        ) : (
+          <div>
+            <div className="upload-icon">
+              <FontAwesomeIcon icon={faCloudArrowUp} />
             </div>
-          )}
-          <input type="file" hidden ref={inputRef} onChange={handleInput} />
-        </UploadContainer>
-        <ButtonContainer>
-          <Button
-            onClick={() => inputRef.current.click()}
-            label="사진 올리기"
-          />
-          <Button onClick={() => setImgUrl(false)} label="사진 초기화" />
-        </ButtonContainer>
-      </ProfileUploadWrapper>
-    </>
+            <div className="upload-text">Drag & Drop</div>
+          </div>
+        )}
+        <input type="file" hidden ref={inputRef} onChange={handleInput} />
+      </UploadContainer>
+
+      <ButtonContainer>
+        <Button onClick={() => inputRef.current.click()} label="업로드" />
+        <Button onClick={() => setImgUrl(false)} label="초기화" />
+      </ButtonContainer>
+    </Wrapper>
   );
 }
 
 export default ProfileUpload;
 
-const ProfileUploadWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const Wrapper = styled.div`
+  margin-bottom: 50px;
 `;
 
 const UploadContainer = styled.div`
@@ -110,7 +104,7 @@ const UploadContainer = styled.div`
   justify-content: center;
   width: 200px;
   height: 200px;
-  margin: 30px 0;
+  margin: 20px auto;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: ${({ theme }) => theme.shadow.boxShadow2};
@@ -136,5 +130,8 @@ const UploadContainer = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  column-gap: 20px;
+  justify-content: center;
+  button:not(:last-child) {
+    margin-right: 20px;
+  }
 `;
