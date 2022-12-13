@@ -1,10 +1,15 @@
+import { useRef } from "react";
 import styled from "styled-components";
 import { MATCH_DAYS } from "../../data/match-days";
+import useSlider from "../../hook/useSlider";
 
 function DayTab({ dayIndex, setDayIndex, scrollToDayMatch }) {
+  const sliderRef = useRef(null);
+  useSlider(sliderRef);
+
   return (
     <Wrapper>
-      <ul>
+      <ul ref={sliderRef}>
         {MATCH_DAYS.map((matchDay) => {
           const { id, month, day, days } = matchDay;
           return (
@@ -32,11 +37,18 @@ const Wrapper = styled.nav`
   ul {
     display: flex;
     padding: 10px;
-    overflow-x: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
     .active {
       box-shadow: none;
       background-color: ${({ theme }) => theme.color.primary};
       color: white;
+    }
+    &.dragging {
+      scroll-behavior: auto;
+    }
+    &.dragging li {
+      pointer-events: none;
     }
     li {
       display: flex;
@@ -50,6 +62,7 @@ const Wrapper = styled.nav`
       text-align: center;
       font-family: "Pretendard-Regular";
       cursor: pointer;
+      user-select: none;
       .order {
         font-size: 16px;
         font-weight: bold;

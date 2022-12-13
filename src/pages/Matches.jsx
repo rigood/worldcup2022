@@ -5,6 +5,7 @@ import DayTab from "../components/Match/DayTab";
 import DayMatch from "../components/Match/DayMatch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import Loader from "../components/Common/Loader";
 
 const EMAIL = process.env.REACT_APP_WORLDCUP_EMAIL;
 const PASSWORD = process.env.REACT_APP_WORLDCUP_PASSWORD;
@@ -17,6 +18,7 @@ const loginInfo = `{
 function Matches() {
   const [dayIndex, setDayIndex] = useState(1);
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const dayRef = useRef([]);
 
@@ -27,6 +29,7 @@ function Matches() {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchTokenAndData = async () => {
       try {
         const response = await fetch("/api/v1/user/login", {
@@ -59,11 +62,15 @@ function Matches() {
         setData(matchesData);
       } catch (err) {
         setError(err.message || "Server Error");
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchTokenAndData();
   }, []);
+
+  if (isLoading) return <Loader msg="경기 정보를 불러오는 중입니다." />;
 
   return (
     <>
