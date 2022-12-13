@@ -6,6 +6,7 @@ import GlobalStyles from "./style/GlobalStyle";
 import Title from "./components/Header/Title";
 import Tab from "./components/Header/Tab";
 import Home from "./pages/Home";
+import Matches from "./pages/Matches";
 import Players from "./pages/Players";
 import Clips from "./pages/Clips";
 import Photos from "./pages/Photos";
@@ -26,7 +27,7 @@ function App() {
           </Header>
           <Main>
             {tabIndex === 0 && <Home />}
-            {/* {tabIndex === 1 && <Matches />} */}
+            {tabIndex === 1 && <Matches />}
             {tabIndex === 2 && <Players />}
             {tabIndex === 3 && <Clips />}
             {tabIndex === 4 && <Photos />}
