@@ -17,6 +17,8 @@ function Slider({ children }) {
   const prevPageX = useRef(0);
   const positionDiff = useRef(0);
 
+  const slideWidthOffsetPercentage = 0.74;
+
   const handleDragStart = (e) => {
     isDragStart.current = true;
     prevPageX.current = e.pageX;
@@ -35,9 +37,9 @@ function Slider({ children }) {
 
   const handleDragEnd = (e) => {
     isDragStart.current = false;
-    scrollRef.current.classList.remove("dragging");
 
     if (!isDragging.current) return;
+    scrollRef.current.classList.remove("dragging");
     isDragging.current = false;
 
     autoSlide();
@@ -56,8 +58,8 @@ function Slider({ children }) {
     const positionDiffAbs = Math.abs(positionDiff.current);
 
     const slider = scrollRef.current;
-    const slideWidth = slider.clientWidth;
-    const valDiff = slideWidth - positionDiffAbs;
+    const slideWidthOffset = slider.clientWidth * slideWidthOffsetPercentage;
+    const valDiff = slideWidthOffset - positionDiffAbs;
 
     // 이전 슬라이드 없는 경우 종료
     if (slider.scrollLeft <= 0) return;
@@ -66,11 +68,13 @@ function Slider({ children }) {
     const maxScrollableWidth = slider.scrollWidth - slider.clientWidth;
     if (maxScrollableWidth - slider.scrollLeft < 1) return;
 
+    // 변수 선언
     let scrollLeftWidth;
+    const minMovementWidth = 20;
 
     // 오른쪽으로 스크롤한 경우
     if (positionDiff.current < 0) {
-      if (positionDiffAbs > slideWidth / 4) {
+      if (positionDiffAbs > minMovementWidth) {
         scrollLeftWidth = scrollRef.current.scrollLeft += valDiff;
       } else {
         scrollLeftWidth = scrollRef.current.scrollLeft -= positionDiffAbs;
@@ -79,7 +83,7 @@ function Slider({ children }) {
 
     // 왼쪽으로 스크롤한 경우
     if (positionDiff.current > 0) {
-      if (positionDiffAbs > slideWidth / 4) {
+      if (positionDiffAbs > minMovementWidth) {
         scrollLeftWidth = scrollRef.current.scrollLeft -= valDiff;
       } else {
         scrollLeftWidth = scrollRef.current.scrollLeft += positionDiffAbs;
@@ -90,13 +94,14 @@ function Slider({ children }) {
   };
 
   const handleButtonClick = (direction) => {
-    const slideWidth = scrollRef.current.clientWidth;
+    const slideWidthOffset =
+      scrollRef.current.clientWidth * slideWidthOffsetPercentage;
     let scrollLeftWidth;
 
     if (direction === "prev") {
-      scrollLeftWidth = scrollRef.current.scrollLeft -= slideWidth;
+      scrollLeftWidth = scrollRef.current.scrollLeft -= slideWidthOffset;
     } else if (direction === "next") {
-      scrollLeftWidth = scrollRef.current.scrollLeft += slideWidth;
+      scrollLeftWidth = scrollRef.current.scrollLeft += slideWidthOffset;
     }
 
     handleButtonShowHide(scrollLeftWidth);
@@ -160,9 +165,9 @@ const NextButton = styled(SliderButton)`
 
 const SliderWrapper = styled.ul`
   display: flex;
+  font-size: 0;
   overflow-x: hidden;
   scroll-behavior: smooth;
-
   &.dragging {
     scroll-behavior: auto;
   }

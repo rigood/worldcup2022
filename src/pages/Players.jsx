@@ -15,8 +15,14 @@ function Players() {
       </TitleContainer>
 
       <Slider>
-        {KOREA_PLAYERS.map((player) => {
-          return <PlayerItem key={player.id} player={player} />;
+        {KOREA_PLAYERS.map((player, index) => {
+          return (
+            <PlayerItem
+              key={player.id}
+              player={player}
+              isLast={index + 1 === KOREA_PLAYERS.length}
+            />
+          );
         })}
       </Slider>
     </>
