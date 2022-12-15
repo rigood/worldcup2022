@@ -12,6 +12,8 @@ import Clips from "./pages/Clips";
 import Photos from "./pages/Photos";
 import MY from "./pages/MY";
 import News from "./pages/News";
+import { desktop } from "./style/responsive";
+import Header1 from "./components/Header/Header1";
 
 function App() {
   const [tabIndex, setTabIndex] = useState(0);
@@ -20,7 +22,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        <Wrapper>
+        {/* <Wrapper>
           <Header>
             <Title />
             <Tab tabIndex={tabIndex} setTabIndex={setTabIndex} />
@@ -31,11 +33,15 @@ function App() {
             {tabIndex === 2 && <Players />}
             {tabIndex === 3 && <Clips />}
             {tabIndex === 4 && <Photos />}
-            {tabIndex === 5 && <MY />}
-            {/* {tabIndex === 6 && <Store />} */}
             {tabIndex === 7 && <News />}
           </Main>
-        </Wrapper>
+        </Wrapper> */}
+        <>
+          <Header1 />
+          <Wrapper>
+            <Main></Main>
+          </Wrapper>
+        </>
       </ThemeProvider>
     </>
   );
@@ -44,26 +50,34 @@ function App() {
 export default App;
 
 const Wrapper = styled.div`
-  width: 100%;
-  max-width: 450px;
-  min-height: 100vh;
+  max-width: 1200px;
+  height: 100vh;
   margin: 0 auto;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  position: relative;
 `;
 
-const Header = styled.nav`
-  position: sticky;
-  top: 0;
-  z-index: 9999;
-`;
+const Main = styled.main``;
 
-const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
+// const Wrapper = styled.div`
+//   width: 100%;
+//   max-width: 450px;
+//   min-height: 100vh;
+//   margin: 0 auto;
+//   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+//   position: relative;
+// `;
 
-  @media (max-width: 449px) {
-    padding: 15px 10px;
-  }
-`;
+// const Header = styled.nav`
+//   position: sticky;
+//   top: 0;
+//   z-index: 9999;
+// `;
+
+// const Main = styled.main`
+//   display: flex;
+//   flex-direction: column;
+//   padding: 20px;
+
+//   @media (max-width: 449px) {
+//     padding: 15px 10px;
+//   }
+// `;
