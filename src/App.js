@@ -3,45 +3,37 @@ import { ThemeProvider } from "styled-components";
 import styled from "styled-components";
 import theme from "./style/theme";
 import GlobalStyles from "./style/GlobalStyle";
-import Title from "./components/Header/Title";
-import Tab from "./components/Header/Tab";
+import Header1 from "./components/Header/Header1";
 import Home from "./pages/Home";
 import Matches from "./pages/Matches";
 import Players from "./pages/Players";
+import News from "./pages/News";
 import Clips from "./pages/Clips";
 import Photos from "./pages/Photos";
 import MY from "./pages/MY";
-import News from "./pages/News";
+import Footer from "./components/Common/Footer";
 import { desktop } from "./style/responsive";
-import Header1 from "./components/Header/Header1";
 
 function App() {
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(1);
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        {/* <Wrapper>
-          <Header>
-            <Title />
-            <Tab tabIndex={tabIndex} setTabIndex={setTabIndex} />
-          </Header>
+        <Header1 tabIndex={tabIndex} setTabIndex={setTabIndex} />
+        <Wrapper>
           <Main>
-            {tabIndex === 0 && <Home />}
-            {tabIndex === 1 && <Matches />}
-            {tabIndex === 2 && <Players />}
-            {tabIndex === 3 && <Clips />}
-            {tabIndex === 4 && <Photos />}
-            {tabIndex === 7 && <News />}
+            {tabIndex === 1 && <Home />}
+            {tabIndex === 2 && <Matches />}
+            {tabIndex === 3 && <Players />}
+            {tabIndex === 4 && <News />}
+            {tabIndex === 5 && <Clips />}
+            {tabIndex === 6 && <Photos />}
+            {tabIndex === 7 && <MY />}
           </Main>
-        </Wrapper> */}
-        <>
-          <Header1 />
-          <Wrapper>
-            <Main></Main>
-          </Wrapper>
-        </>
+        </Wrapper>
+        <Footer />
       </ThemeProvider>
     </>
   );
@@ -51,33 +43,10 @@ export default App;
 
 const Wrapper = styled.div`
   max-width: 1200px;
-  height: 100vh;
   margin: 0 auto;
 `;
 
-const Main = styled.main``;
-
-// const Wrapper = styled.div`
-//   width: 100%;
-//   max-width: 450px;
-//   min-height: 100vh;
-//   margin: 0 auto;
-//   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-//   position: relative;
-// `;
-
-// const Header = styled.nav`
-//   position: sticky;
-//   top: 0;
-//   z-index: 9999;
-// `;
-
-// const Main = styled.main`
-//   display: flex;
-//   flex-direction: column;
-//   padding: 20px;
-
-//   @media (max-width: 449px) {
-//     padding: 15px 10px;
-//   }
-// `;
+const Main = styled.main`
+  margin-top: 80px;
+  ${desktop({ marginTop: "140px" })}
+`;

@@ -65,5 +65,5 @@ export default useSlider;
 // 버튼으로 이동 시 smooth, 드래그 시 auto
 // scroll-behavior: smooth;
 // &.dragging {scroll-behavior: auto;}
-// 슬라이더 이동 시 글자 드래그 방지
+// 슬라이더 이동 시 하위항목 클릭 방지
 // &.dragging ${하위항목} {pointer-events: none;}

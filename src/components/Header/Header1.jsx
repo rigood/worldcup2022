@@ -1,25 +1,33 @@
 import { useRef } from "react";
 import styled, { keyframes } from "styled-components";
-import { desktop } from "../../style/responsive";
-import { tabs } from "./../../data/tabs";
-import SportsSoccerRoundedIcon from "@mui/icons-material/SportsSoccerRounded";
 import useSlider from "../../hook/useSlider";
+import { tabs } from "./../../data/tabs";
+import { desktop } from "../../style/responsive";
+import SportsSoccerRoundedIcon from "@mui/icons-material/SportsSoccerRounded";
 
-function Header1() {
+function Header1({ tabIndex, setTabIndex }) {
   const tabContainerRef = useRef(null);
   useSlider(tabContainerRef);
+
+  const handleTabClick = (index) => setTabIndex(index);
 
   return (
     <Container>
       <Wrapper>
         <Left>
-          <Title>카타르월드컵</Title>
+          <Title onClick={() => handleTabClick(1)}>카타르월드컵</Title>
           <SubTitle>꿈을 현실로 ★ 도전은 계속된다</SubTitle>
         </Left>
         <Center>
           <TabContainer ref={tabContainerRef}>
             {tabs.map((tab) => (
-              <TabItem key={tab}>{tab}</TabItem>
+              <TabItem
+                key={tab.id}
+                onClick={() => handleTabClick(tab.id)}
+                className={tabIndex === tab.id && "selected"}
+              >
+                {tab.name}
+              </TabItem>
             ))}
           </TabContainer>
         </Center>
@@ -38,10 +46,11 @@ export default Header1;
 const Container = styled.header`
   width: 100%;
   height: 80px;
-  background-color: #8a173a;
+  background-color: #8a1538;
   position: fixed;
   top: 0;
   ${desktop({ height: "140px" })}
+  z-index: 1;
 `;
 
 const Wrapper = styled.div`
@@ -64,6 +73,8 @@ const Title = styled.h1`
   color: white;
   font-size: 28px;
   padding: 0 10px;
+  cursor: pointer;
+  user-select: none;
 `;
 
 const SubTitle = styled.div`
@@ -100,6 +111,14 @@ const TabItem = styled.span`
   position: relative;
   padding: 0 5px;
   white-space: nowrap;
+  user-select: none;
+
+  &.selected {
+    color: white;
+    &::after {
+      width: 100%;
+    }
+  }
 
   &::after {
     content: "";
