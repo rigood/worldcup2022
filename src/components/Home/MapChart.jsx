@@ -43,7 +43,7 @@ function MapChart() {
             }
           }}
         >
-          <ZoomableGroup center={[90, 30]} zoom={3}>
+          <ZoomableGroup center={[90, 30]} zoom={2}>
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
                 geographies.map((geo) => (

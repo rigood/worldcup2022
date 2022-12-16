@@ -21,12 +21,8 @@ const Wrapper = styled.button.attrs((props) => ({
   width: fit-content;
   padding: 10px 30px;
   font-size: ${({ fontSize }) => fontSize || "16px"};
-  font-family: "GmarketSansMedium";
+  font-family: "Pretendard";
   color: ${({ textColor, theme }) =>
     textColor ? textColor : theme.color.primary};
   box-shadow: ${({ theme }) => theme.shadow.boxShadow};
-  span {
-    position: relative;
-    bottom: -2px;
-  }
 `;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useLocalStorage from "../../hook/useLocalStorage";
-import TitleContainer from "../Common/TitleContainer";
+import Title from "../Common/Title";
 import ProfileInput from "./ProfileInput";
 import Button from "./../Common/Button";
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
@@ -33,12 +33,9 @@ function ProfileInfo() {
 
   return isNew ? (
     <>
-      <TitleContainer>
-        <FontAwesomeIcon icon={faAddressCard} />
-        <h2>
-          {Object.entries(profile).length === 0 ? "프로필 입력" : "프로필 수정"}
-        </h2>
-      </TitleContainer>
+      <Title>
+        {Object.entries(profile).length === 0 ? "프로필 입력" : "프로필 수정"}
+      </Title>
 
       <FormContainer onSubmit={handleSubmit}>
         <ProfileInput

@@ -18,7 +18,7 @@ function Footer() {
           <Logo>Rigood.</Logo>
           <Desc>
             개인 포트폴리오용으로 제작된 사이트입니다. <br />
-            This website is built for portfolio.
+            슬라이더 이미지 출처: wallpapers.com
           </Desc>
           <SocialContainer>
             <SocialIcon
@@ -52,7 +52,7 @@ function Footer() {
           </SocialContainer>
         </Left>
         <Right>
-          <Title>Contact</Title>
+          <Title>Contact.</Title>
           <ContactItem>
             <Room style={{ marginRight: "10px", color: "white" }} />
             Incheon, South Korea
@@ -91,21 +91,21 @@ const Wrapper = styled.div`
   margin: 0 auto;
   padding: 60px 20px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   ${tablet({ flexDirection: "column", padding: "40px 10px" })}
 `;
 
 const Left = styled.div`
-  flex: 2;
   display: flex;
   flex-direction: column;
-  ${tablet({ alignItems: "center", marginBottom: "50px" })}
+  ${tablet({ alignItems: "center", marginBottom: "40px" })}
 `;
 
 const Logo = styled.h2`
   color: white;
   font-size: 28px;
-  font-family: "ghanachoco";
+  font-family: "GhanaChocolate";
 `;
 
 const Desc = styled.p`
@@ -140,7 +140,6 @@ const SocialIcon = styled.a`
 `;
 
 const Right = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: column;
   ${tablet({ alignItems: "center" })}
@@ -148,15 +147,14 @@ const Right = styled.div`
 
 const Title = styled.h2`
   color: white;
-  font-size: 18px;
-  font-family: "Pretendard";
-  font-weight: 700;
+  font-size: 24px;
+  font-family: "GhanaChocolate";
   margin-bottom: 20px;
 `;
 
 const ContactItem = styled.div`
   &:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
   display: flex;
   align-items: center;

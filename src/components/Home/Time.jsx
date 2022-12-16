@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getLocalDateTime } from "../../utils/getLocalDateTime";
-import TitleContainer from "../Common/TitleContainer";
+import Title from "../Common/Title";
 import TimeItem from "./TimeItem";
-import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { mobile } from "./../../style/responsive";
 
 function Time() {
   const QATAR_TIME_DIFF = 3;
@@ -27,10 +26,8 @@ function Time() {
 
   return (
     <Wrapper>
-      <TitleContainer>
-        <FontAwesomeIcon icon={faClock} />
-        <h2>현지 시간</h2>
-      </TitleContainer>
+      <Title>카타르 시간</Title>
+
       <TimeContainer>
         <TimeItem koName="카타르" enName="qatar" dateTime={qatarDateTime} />
         <TimeItem koName="대한민국" enName="korea" dateTime={koreaDateTime} />
@@ -42,7 +39,11 @@ function Time() {
 export default Time;
 
 const Wrapper = styled.div`
-  margin-bottom: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 150px;
+  padding: 40px 20px;
+  ${mobile({ marginTop: "75px" })}
 `;
 
 const TimeContainer = styled.div`
@@ -50,4 +51,5 @@ const TimeContainer = styled.div`
   border-radius: 5px;
   box-shadow: ${({ theme }) => theme.shadow.boxShadow};
   display: flex;
+  ${mobile({ flexDirection: "column" })}
 `;

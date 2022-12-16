@@ -7,8 +7,7 @@ import NewsItem from "../components/News/NewsItem";
 import NewsSkeleton from "./../components/News/NewsSkeleton";
 import ErrorElement from "../components/Common/ErrorElement";
 import Button from "./../components/Common/Button";
-import TitleContainer from "../components/Common/TitleContainer";
-import { faSoccerBall } from "@fortawesome/free-solid-svg-icons";
+import Title from "../components/Common/Title";
 
 const BASE_URL =
   "https://newsapi.org/v2/top-headlines?country=kr&category=sports&pageSize=100";
@@ -34,12 +33,9 @@ function News() {
   };
 
   return (
-    <>
+    <Wrapper>
       <TitleFilterContainer>
-        <TitleContainer>
-          <FontAwesomeIcon icon={faSoccerBall} />
-          <h2>스포츠 뉴스</h2>
-        </TitleContainer>
+        <Title>스포츠 뉴스</Title>
         <NewsFilter filter={filter} setFilter={setFilter} articles={articles} />
       </TitleFilterContainer>
 
@@ -57,11 +53,17 @@ function News() {
           <Button type="button" label="더보기" onClick={handleLoad} />
         </ButtonWrapper>
       )}
-    </>
+    </Wrapper>
   );
 }
 
 export default News;
+
+const Wrapper = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+`;
 
 const TitleFilterContainer = styled.div`
   display: flex;

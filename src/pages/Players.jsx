@@ -1,18 +1,13 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { KOREA_PLAYERS } from "../data/korea-players";
-import TitleContainer from "../components/Common/TitleContainer";
+import Title from "../components/Common/Title";
 import Slider from "../components/Common/Slider";
 import PlayerItem from "./../components/Player/PlayerItem";
-import { faTrophy } from "@fortawesome/free-solid-svg-icons";
 
 function Players() {
   return (
-    <>
-      <TitleContainer>
-        <FontAwesomeIcon icon={faTrophy} />
-        <h2>대한민국 국가대표</h2>
-      </TitleContainer>
+    <Wrapper>
+      <Title>대한민국 국가대표</Title>
 
       <Slider>
         {KOREA_PLAYERS.map((player, index) => {
@@ -25,8 +20,14 @@ function Players() {
           );
         })}
       </Slider>
-    </>
+    </Wrapper>
   );
 }
 
 export default Players;
+
+const Wrapper = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+`;

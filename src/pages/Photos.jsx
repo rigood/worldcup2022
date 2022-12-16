@@ -1,17 +1,15 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useDebounce from "../hook/useDebounce";
 import useKakaoSearch from "../hook/useKakaoSearch";
 import useInfiniteScroll from "../hook/useInfiniteScroll";
-import TitleContainer from "../components/Common/TitleContainer";
+import Title from "../components/Common/Title";
 import SearchForm from "./../components/Common/Search/SearchForm";
 import PopularSearch from "./../components/Common/Search/PopularSearch";
 import SortRadioButtons from "./../components/Common/Search/SortRadioButtons";
 import PhotoItem from "./../components/Photo/PhotoItem";
 import PhotoSkeleton from "./../components/Photo/PhotoSkeleton";
 import ErrorElement from "./../components/Common/ErrorElement";
-import { faImage } from "@fortawesome/free-solid-svg-icons";
 
 function Photos() {
   const PAGE_SIZE = 14;
@@ -31,12 +29,9 @@ function Photos() {
   const lastPhotoRef = useInfiniteScroll(isLoading, hasMorePage, setPage);
 
   return (
-    <>
+    <Wrapper>
       <TitleSortContainer>
-        <TitleContainer>
-          <FontAwesomeIcon icon={faImage} />
-          <h2>이미지 검색</h2>
-        </TitleContainer>
+        <Title>이미지 검색</Title>
         <SortRadioButtons setSort={setSort} />
       </TitleSortContainer>
 
@@ -62,10 +57,16 @@ function Photos() {
       )}
 
       {error && <ErrorElement />}
-    </>
+    </Wrapper>
   );
 }
 export default Photos;
+
+const Wrapper = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+`;
 
 const TitleSortContainer = styled.div`
   display: flex;

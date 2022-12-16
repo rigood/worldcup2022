@@ -35,7 +35,7 @@ export default SortRadioButtons;
 const FiledSet = styled.fieldset`
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 const Radio = styled.label`

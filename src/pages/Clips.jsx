@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useDebounce from "../hook/useDebounce";
 import useKakaoSearch from "../hook/useKakaoSearch";
 import useInfiniteScroll from "../hook/useInfiniteScroll";
-import TitleContainer from "../components/Common/TitleContainer";
+import Title from "../components/Common/Title";
 import SearchForm from "./../components/Common/Search/SearchForm";
 import PopularSearch from "./../components/Common/Search/PopularSearch";
 import SortRadioButtons from "./../components/Common/Search/SortRadioButtons";
 import ClipItem from "./../components/Clip/ClipItem";
 import ClipSkeleton from "./../components/Clip/ClipSkeleton";
 import ErrorElement from "./../components/Common/ErrorElement";
-import { faVideo } from "@fortawesome/free-solid-svg-icons";
 import Line from "../components/Common/Line";
 
 function Clips() {
@@ -32,12 +30,9 @@ function Clips() {
   const lastClipRef = useInfiniteScroll(isLoading, hasMorePage, setPage);
 
   return (
-    <>
+    <Wrapper>
       <TitleSortContainer>
-        <TitleContainer>
-          <FontAwesomeIcon icon={faVideo} />
-          <h2>동영상 검색</h2>
-        </TitleContainer>
+        <Title>동영상 검색</Title>
         <SortRadioButtons setSort={setSort} />
       </TitleSortContainer>
 
@@ -62,11 +57,17 @@ function Clips() {
       {!isLoading && !error ? <div ref={lastClipRef} /> : null}
       {isLoading && <ClipSkeleton count={PAGE_SIZE} />}
       {error && <ErrorElement />}
-    </>
+    </Wrapper>
   );
 }
 
 export default Clips;
+
+const Wrapper = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+`;
 
 const TitleSortContainer = styled.div`
   display: flex;

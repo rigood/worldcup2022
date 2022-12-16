@@ -20,22 +20,23 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 100px;
+  padding: 100px 0;
   svg {
     font-size: 48px;
     color: ${({ theme }) => theme.color.primary};
     margin-bottom: 20px;
   }
   .msg {
-    font-family: "Pretendard-Regular";
+    font-family: "Pretendard";
     text-align: center;
     h2 {
-      font-size: 18px;
+      font-size: 20px;
+      font-weight: bold;
       color: ${({ theme }) => theme.color.primary};
       margin-bottom: 10px;
     }
     p {
-      font-size: 14px;
+      font-size: 16px;
     }
   }
 `;

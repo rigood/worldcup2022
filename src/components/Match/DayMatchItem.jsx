@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import styled from "styled-components";
 
 function getGroup(group) {
@@ -84,7 +83,7 @@ export default DayMatchItem;
 
 const Wrapper = styled.div`
   width: 100%;
-  margin: 15px 0 35px;
+  margin: 20px 0 80px;
   border-radius: 10px;
   box-shadow: ${({ theme }) => theme.shadow.boxShadow};
   overflow: hidden;
@@ -108,7 +107,9 @@ const TopRow = styled.div`
       box-shadow: ${({ theme }) => theme.shadow.boxShadow};
     }
     .country {
+      font-size: 18px;
       font-weight: bold;
+      text-align: center;
     }
   }
   .score-box {
@@ -120,7 +121,8 @@ const TopRow = styled.div`
     position: relative;
     bottom: 5px;
     .group-info {
-      font-size: 12px;
+      font-size: 16px;
+      font-weight: bold;
       line-height: 2;
     }
     .score-num,

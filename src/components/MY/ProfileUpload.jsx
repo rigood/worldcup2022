@@ -2,9 +2,9 @@ import { useState, useRef } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useLocalStorage from "../../hook/useLocalStorage";
-import TitleContainer from "../Common/TitleContainer";
+import Title from "../Common/Title";
 import Button from "../Common/Button";
-import { faUser, faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 function ProfileUpload() {
   const [active, setActive] = useState(false);
@@ -58,10 +58,7 @@ function ProfileUpload() {
 
   return (
     <Wrapper>
-      <TitleContainer>
-        <FontAwesomeIcon icon={faUser} />
-        <h2>프로필 사진</h2>
-      </TitleContainer>
+      <Title>프로필 사진</Title>
 
       <UploadContainer
         onDragOver={handleDragOver}

@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TitleContainer from "../Common/TitleContainer";
-import { faCloudSun } from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../hook/useFetch";
+import { mobile } from "../../style/responsive";
+import Title from "../Common/Title";
 import WeatherItem from "./WeatherItem";
 
 const BASE_URL =
@@ -12,34 +11,17 @@ const API_KEY = process.env.REACT_APP_WEATHER_KEY;
 function Weather() {
   const url = `${BASE_URL}&appid=${API_KEY}&q=`;
 
-  const {
-    data: qatarData,
-    isLoading: qatarLoading,
-    error: qatarError,
-  } = useFetch(url + "doha");
-
-  const {
-    data: koreaData,
-    isLoading: koreaLoading,
-    error: koreaError,
-  } = useFetch(url + "seoul");
-
-  const isLoading = qatarLoading || koreaLoading;
-  const error = qatarError || koreaError;
+  const { data: qatarData } = useFetch(url + "doha");
+  const { data: koreaData } = useFetch(url + "seoul");
 
   return (
     <Wrapper>
-      <TitleContainer>
-        <FontAwesomeIcon icon={faCloudSun} />
-        <h2>현재 날씨</h2>
-      </TitleContainer>
+      <Title>카타르 날씨</Title>
 
-      {!isLoading && !error ? (
-        <WeatherContainer>
-          <WeatherItem koName="카타르" enName="qatar" data={qatarData} />
-          <WeatherItem koName="대한민국" enName="korea" data={koreaData} />
-        </WeatherContainer>
-      ) : null}
+      <WeatherContainer>
+        <WeatherItem koName="카타르" enName="qatar" data={qatarData} />
+        <WeatherItem koName="대한민국" enName="korea" data={koreaData} />
+      </WeatherContainer>
     </Wrapper>
   );
 }
@@ -47,7 +29,9 @@ function Weather() {
 export default Weather;
 
 const Wrapper = styled.div`
-  margin-bottom: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
 `;
 
 const WeatherContainer = styled.div`
@@ -55,4 +39,5 @@ const WeatherContainer = styled.div`
   border-radius: 5px;
   box-shadow: ${({ theme }) => theme.shadow.boxShadow};
   display: flex;
+  ${mobile({ flexDirection: "column" })}
 `;

@@ -5,29 +5,13 @@ const GlobalStyles = createGlobalStyle`
 ${reset}
 
 @font-face {
-  font-family: "GmarketSansMedium";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-style: normal;
-} */
-
-@font-face {
   font-family: "digital";
   src: url("/assets/fonts/LAB_digital.ttf");
 }
 
 @font-face {
-    font-family: 'ghanachoco';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ghanachoco.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "qatar";
+  src: url("/assets/fonts/Frutiger_Regular.otf");
 }
 
 *{

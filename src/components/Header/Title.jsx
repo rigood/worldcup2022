@@ -27,7 +27,7 @@ const Wrapper = styled.section`
 const Text = styled.h1`
   font-size: 24px;
   font-weight: bold;
-  font-family: "GmarketSansMedium";
+  font-family: "Pretendard";
   color: white;
 `;
 

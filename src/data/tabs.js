@@ -17,11 +17,11 @@ export const tabs = [
   },
   {
     id: 5,
-    name: "동영상",
+    name: "영상",
   },
   {
     id: 6,
-    name: "이미지",
+    name: "포토",
   },
 
   {

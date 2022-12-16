@@ -1,14 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import Profile from "../components/MY/Profile";
 import Like from "../components/MY/Like";
 
 function MY() {
   const [tabIndex, setTabIndex] = useState(0);
   return (
-    <>
+    <Wrapper>
       <Tab>
         <TabItem
           className={tabIndex === 0 && "active"}
@@ -27,11 +25,17 @@ function MY() {
         {tabIndex === 0 && <Profile />}
         {tabIndex === 1 && <Like />}
       </Main>
-    </>
+    </Wrapper>
   );
 }
 
 export default MY;
+
+const Wrapper = styled.div`
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+`;
 
 const Tab = styled.div`
   display: flex;
@@ -43,7 +47,7 @@ const TabItem = styled.div`
   flex: 1;
   text-align: center;
   font-size: 18px;
-  font-family: "GmarketSansMedium";
+  font-family: "Pretendard";
   color: ${({ theme }) => theme.color.gray};
   line-height: 2;
   cursor: pointer;

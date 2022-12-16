@@ -1,17 +1,16 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TitleContainer from "../Common/TitleContainer";
+import { mobile } from "../../style/responsive";
+import Title from "../Common/Title";
 import MapChart from "./MapChart";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 function Map() {
   return (
     <Wrapper>
-      <TitleContainer>
-        <FontAwesomeIcon icon={faLocationDot} />
-        <h2>지도 위에 마우스를 올려보세요.</h2>
-      </TitleContainer>
-      <MapChart />
+      <Title>카타르 위치</Title>
+
+      <MapChartContainer>
+        <MapChart />
+      </MapChartContainer>
     </Wrapper>
   );
 }
@@ -19,5 +18,16 @@ function Map() {
 export default Map;
 
 const Wrapper = styled.div`
-  margin-bottom: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 80px;
+  padding: 40px 20px;
+  ${mobile({ marginBottom: "40px" })}
+`;
+
+const MapChartContainer = styled.div`
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: ${({ theme }) => theme.shadow.boxShadow};
+  font-size: 0;
 `;

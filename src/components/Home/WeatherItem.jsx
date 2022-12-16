@@ -10,15 +10,19 @@ function WeatherItem(props) {
         <img src={`/assets/${enName}-flag.png`} />
         <span className="name">{koName}</span>
       </div>
+
       <img src={getIconUrl(data?.weather?.[0]?.icon)} />
-      <div className="temp">
-        <div className="current">{data?.main?.temp?.toFixed(1)}°</div>
-        <div className="minmax">
-          <span className="min">{data?.main?.temp_min?.toFixed()}°</span>
-          <span className="line">/</span>
-          <span className="max">{data?.main?.temp_max?.toFixed()}°</span>
+
+      {data?.main?.temp ? (
+        <div className="temp">
+          <div className="current">{data?.main?.temp?.toFixed(1)}°</div>
+          <div className="minmax">
+            <span className="min">{data?.main?.temp_min?.toFixed()}°</span>
+            <span className="line">/</span>
+            <span className="max">{data?.main?.temp_max?.toFixed()}°</span>
+          </div>
         </div>
-      </div>
+      ) : null}
     </Wrapper>
   );
 }
@@ -34,7 +38,7 @@ const Wrapper = styled.div`
 
   .country {
     font-size: 18px;
-    font-family: "GmarketSansMedium";
+    font-family: "Pretendard";
     img {
       width: 24px;
       margin-right: 7.5px;
@@ -48,7 +52,7 @@ const Wrapper = styled.div`
   }
   .temp {
     text-align: center;
-    font-family: "Pretendard-Regular";
+    font-family: "Pretendard";
     .current {
       font-size: 24px;
       font-weight: bold;

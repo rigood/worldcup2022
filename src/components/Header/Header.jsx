@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import useSlider from "../../hook/useSlider";
-import { tabs } from "./../../data/tabs";
-import { desktop } from "../../style/responsive";
+import { tabs } from "../../data/tabs";
+import { desktop, tablet, mobile, fold } from "../../style/responsive";
 import SportsSoccerRoundedIcon from "@mui/icons-material/SportsSoccerRounded";
 
-function Header1({ tabIndex, setTabIndex }) {
+function Header({ tabIndex, setTabIndex }) {
   const tabContainerRef = useRef(null);
   useSlider(tabContainerRef);
 
@@ -15,8 +15,7 @@ function Header1({ tabIndex, setTabIndex }) {
     <Container>
       <Wrapper>
         <Left>
-          <Title onClick={() => handleTabClick(1)}>카타르월드컵</Title>
-          <SubTitle>꿈을 현실로 ★ 도전은 계속된다</SubTitle>
+          <Title onClick={() => handleTabClick(1)}>World Cup 2022</Title>
         </Left>
         <Center>
           <TabContainer ref={tabContainerRef}>
@@ -33,7 +32,7 @@ function Header1({ tabIndex, setTabIndex }) {
         </Center>
         <Right>
           <Icon>
-            <SportsSoccerRoundedIcon style={{ color: "white" }} />
+            <SportsSoccerRoundedIcon style={{ color: "#8a173a" }} />
           </Icon>
         </Right>
       </Wrapper>
@@ -41,16 +40,17 @@ function Header1({ tabIndex, setTabIndex }) {
   );
 }
 
-export default Header1;
+export default Header;
 
 const Container = styled.header`
   width: 100%;
-  height: 80px;
-  background-color: #8a1538;
+  height: 120px;
   position: fixed;
   top: 0;
-  ${desktop({ height: "140px" })}
-  z-index: 1;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  z-index: 9999;
 `;
 
 const Wrapper = styled.div`
@@ -69,24 +69,14 @@ const Left = styled.div`
 `;
 
 const Title = styled.h1`
-  font-family: "ghanachoco";
-  color: white;
-  font-size: 28px;
-  padding: 0 10px;
+  font-family: "GhanaChocolate";
+  color: #8a173a;
+  font-size: 32px;
+  letter-spacing: -1px;
   cursor: pointer;
   user-select: none;
-`;
-
-const SubTitle = styled.div`
-  display: none;
-  position: absolute;
-  left: 0;
-  bottom: -20px;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 12px;
-  font-family: "Pretendard";
-  padding: 0 10px;
-  ${desktop({ display: "block" })}
+  ${tablet({ fontSize: "28px" })}
+  ${mobile({ fontSize: "24px" })}
 `;
 
 const Center = styled.div`
@@ -100,9 +90,8 @@ const TabContainer = styled.nav`
 `;
 
 const TabItem = styled.span`
-  color: rgba(255, 255, 255, 0.85);
   font-family: "Pretendard";
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   &:not(:last-child) {
     margin-right: 30px;
@@ -114,7 +103,7 @@ const TabItem = styled.span`
   user-select: none;
 
   &.selected {
-    color: white;
+    color: #8a173a;
     &::after {
       width: 100%;
     }
@@ -123,9 +112,9 @@ const TabItem = styled.span`
   &::after {
     content: "";
     position: absolute;
-    background-color: #febf10;
+    background-color: #8a173a;
     width: 0%;
-    height: 2px;
+    height: 3px;
     left: 0;
     bottom: -10px;
     transition: 0.3s;
@@ -133,15 +122,19 @@ const TabItem = styled.span`
 
   @media (hover: hover) {
     &:hover {
-      color: white;
+      color: #8a173a;
     }
     &:hover::after {
       width: 100%;
     }
   }
+
+  ${mobile({ fontSize: "16px" })}
 `;
 
-const Right = styled.div``;
+const Right = styled.div`
+  ${fold({ display: "none" })}
+`;
 
 const bounce = keyframes`
   0%,
@@ -161,7 +154,6 @@ const bounce = keyframes`
 
 const Icon = styled.div`
   cursor: pointer;
-  padding: 10px;
   position: relative;
   bottom: -3px;
 

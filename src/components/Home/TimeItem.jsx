@@ -36,14 +36,14 @@ const Wrapper = styled.div`
     }
     .name {
       font-size: 18px;
-      font-family: "GmarketSansMedium";
+      font-family: "Pretendard";
     }
   }
 
   .datetime {
     flex: 1;
     text-align: center;
-    font-family: "Pretendard-Regular";
+    font-family: "Pretendard";
 
     .date {
       font-size: 14px;

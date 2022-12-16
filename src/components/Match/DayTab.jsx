@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MATCH_DAYS } from "../../data/match-days";
 import useSlider from "../../hook/useSlider";
 
-function DayTab({ dayIndex, setDayIndex, scrollToDayMatch }) {
+function DayTab({ dayIndex, setDayIndex }) {
   const sliderRef = useRef(null);
   useSlider(sliderRef);
 
@@ -16,11 +16,11 @@ function DayTab({ dayIndex, setDayIndex, scrollToDayMatch }) {
             <li
               key={id}
               className={id === dayIndex ? "active" : null}
-              onClick={() => scrollToDayMatch(id)}
+              onClick={() => setDayIndex(id)}
             >
               <div className="order">{id}일차</div>
               <div className="date">
-                {month}/{day}({days})
+                {day}({days})
               </div>
             </li>
           );
@@ -34,42 +34,41 @@ export default DayTab;
 
 const Wrapper = styled.nav`
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   ul {
     display: flex;
-    padding: 10px;
     overflow-x: hidden;
     scroll-behavior: smooth;
-    .active {
-      box-shadow: none;
-      background-color: ${({ theme }) => theme.color.primary};
-      color: white;
-    }
     &.dragging {
       scroll-behavior: auto;
     }
     &.dragging li {
       pointer-events: none;
     }
+    .active {
+      background-color: ${({ theme }) => theme.color.primary};
+      color: white;
+    }
     li {
       display: flex;
       flex-direction: column;
       margin-right: 10px;
-      padding: 20px 15px;
+      padding: 20px 30px;
       border-radius: 20px;
-      box-shadow: ${({ theme }) => theme.shadow.boxShadow};
-      color: ${({ theme }) => theme.color.gray};
+      background-color: ${({ theme }) => theme.color.lightprimary};
       white-space: nowrap;
       text-align: center;
-      font-family: "Pretendard-Regular";
+      font-family: "Pretendard";
       cursor: pointer;
       user-select: none;
       .order {
-        font-size: 16px;
-        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 10px;
       }
       .date {
-        font-size: 12px;
-        line-height: 1.5;
+        font-size: 16px;
+        font-weight: bold;
       }
     }
   }
