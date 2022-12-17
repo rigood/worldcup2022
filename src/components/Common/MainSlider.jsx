@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { mobile } from "./../../style/responsive";
@@ -7,7 +7,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import useMainSlider from "../../hook/useMainSlider";
+// import useMainSlider from "../../hook/useMainSlider";
 
 function getNewArray(arr) {
   const firstSlide = arr[0];
@@ -52,8 +52,27 @@ function MainSlider() {
 
   const handleDotClick = (index) => setSlideIndex(index);
 
-  const sliderRef = useRef();
-  useMainSlider(sliderRef, handlePrevClick, handleNextClick);
+  // 마우스, 터치 이벤트 적용
+  const startX = useRef(null);
+
+  const handleStart = (e) => {
+    startX.current = e.pageX || e.touches[0].pageX;
+  };
+
+  const handleStop = (e) => {
+    const endX = e.pageX || e.changedTouches[0].pageX;
+    const diff = endX - startX.current;
+
+    if (diff > 0) {
+      handlePrevClick();
+    } else if (diff < 0) {
+      handleNextClick();
+    }
+  };
+
+  // 커스텀훅 사용할 경우, 리렌더링 되면서 slideIndex가 1로 초기화됨
+  // const sliderRef = useRef();
+  // useMainSlider(sliderRef, handlePrevClick, handleNextClick);
 
   return (
     <>
@@ -62,7 +81,11 @@ function MainSlider() {
           <FontAwesomeIcon icon={faChevronLeft} />
         </Arrow>
         <SlideWrapper
-          ref={sliderRef}
+          onTouchStart={handleStart}
+          onTouchEnd={handleStop}
+          onMouseDown={handleStart}
+          onMouseUp={handleStop}
+          // ref={sliderRef}
           slideIndex={slideIndex}
           style={{
             transform: `translateX(-${slideIndex * 100}%)`,
