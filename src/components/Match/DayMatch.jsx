@@ -2,10 +2,10 @@ import { forwardRef } from "react";
 import styled from "styled-components";
 import DayMatchItem from "./DayMatchItem";
 
-function DayMatch({ day, dataByDay }, ref) {
+function DayMatch({ id, day, dataByDay }, ref) {
   return (
-    <Wrapper>
-      <Title ref={ref}>
+    <Wrapper ref={ref} id={id}>
+      <Title>
         <span className="date">
           {day.month}/{day.day}({day.days})
         </span>

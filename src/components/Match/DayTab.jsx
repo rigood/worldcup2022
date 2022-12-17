@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MATCH_DAYS } from "../../data/match-days";
 import useSlider from "../../hook/useSlider";
 
-function DayTab({ dayIndex, setDayIndex }) {
+function DayTab({ dayIndex, handleDayTabClick }) {
   const sliderRef = useRef(null);
   useSlider(sliderRef);
 
@@ -16,7 +16,7 @@ function DayTab({ dayIndex, setDayIndex }) {
             <li
               key={id}
               className={id === dayIndex ? "active" : null}
-              onClick={() => setDayIndex(id)}
+              onClick={() => handleDayTabClick(id)}
             >
               <div className="order">{id}일차</div>
               <div className="date">

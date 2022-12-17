@@ -23,16 +23,16 @@ function Matches() {
   const [error, setError] = useState(null);
   const dayRef = useRef([]);
 
-  useEffect(() => {
+  const handleDayTabClick = (index) => {
     if (dayRef && dayRef.current) {
       const offset =
-        dayRef.current[dayIndex].getBoundingClientRect().top +
+        dayRef.current[index].getBoundingClientRect().top +
         window.pageYOffset -
         300;
       window.scrollTo({ top: offset });
+      setDayIndex(index);
     }
-    return () => window.scrollTo({ top: 0 });
-  }, [dayIndex]);
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -52,7 +52,6 @@ function Matches() {
 
         const results = await response.json();
         const token = await results.data.token;
-        console.log(token);
 
         const matchesResponse = await fetch("/api/v1/match", {
           headers: {
@@ -63,7 +62,6 @@ function Matches() {
 
         const matchesResults = await matchesResponse.json();
         const matchesData = matchesResults.data;
-        console.log(matchesData);
 
         setData(matchesData);
       } catch (err) {
@@ -76,12 +74,55 @@ function Matches() {
     fetchTokenAndData();
   }, []);
 
+  const observer = useRef([]);
+  useEffect(() => {
+    const dayRefArray = MATCH_DAYS.map((day) => dayRef.current[day.id]);
+    console.log(dayRefArray);
+
+    if (isLoading) return;
+
+    dayRefArray.forEach((dayRef, index) => {
+      if (observer.current[index + 1]) {
+        observer.current[index + 1].disconnect();
+      }
+    });
+
+    dayRefArray.forEach((dayRef, index) => {
+      observer.current[index + 1] = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            console.log(index + 1, "교차했음", entries[0].target.id);
+            const id = parseInt(entries[0].target.id);
+            setDayIndex(id);
+          }
+        },
+
+        {
+          rootMargin: document.getElementById("main"),
+          rootMargin: "-120px 0px 0px 0px",
+          threshold: 0.5,
+        }
+      );
+    });
+
+    dayRefArray.forEach((dayRef, index) => {
+      observer.current[index + 1].observe(dayRef);
+      console.log("observer등록", dayRef);
+    });
+
+    return () => {
+      dayRefArray.forEach((dayRef, index) => {
+        observer.current[index + 1].disconnect();
+      });
+    };
+  }, [isLoading]);
+
   if (isLoading) return <Loader msg="경기 정보를 불러오는 중입니다." />;
 
   return (
     <>
       <Fixed>
-        <DayTab dayIndex={dayIndex} setDayIndex={setDayIndex} />
+        <DayTab dayIndex={dayIndex} handleDayTabClick={handleDayTabClick} />
 
         <InfoMsg>
           <FontAwesomeIcon icon={faCircleInfo} />
@@ -94,6 +135,7 @@ function Matches() {
           return (
             <DayMatch
               key={day.id}
+              id={day.id}
               day={day}
               dataByDay={data?.filter(
                 (match) => match.matchday === String(day.id)
