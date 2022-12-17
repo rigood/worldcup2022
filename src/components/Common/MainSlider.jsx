@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { mobile } from "./../../style/responsive";
@@ -7,29 +7,70 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import useMainSlider from "../../hook/useMainSlider";
+
+function getNewArray(arr) {
+  const firstSlide = arr[0];
+  const lastSlide = arr[arr.length - 1];
+  const newArray = [lastSlide, ...arr, firstSlide];
+  return newArray;
+}
 
 function MainSlider() {
-  const [slideIndex, setSlideIndex] = useState(0);
+  const [slideIndex, setSlideIndex] = useState(1);
+  const [slideTransition, setSlideTransition] = useState(
+    "transform 500ms ease-in-out"
+  );
 
-  const handleArrowClick = (direction) => {
-    if (direction === "left") {
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : photos.length - 1);
-    } else {
-      setSlideIndex(slideIndex < photos.length - 1 ? slideIndex + 1 : 0);
+  const originalArrayLength = photos.length;
+  const newArray = getNewArray(photos);
+
+  const moveWithoutTransition = (index) => {
+    setTimeout(() => {
+      setSlideIndex(index);
+      setSlideTransition("");
+    }, 500);
+  };
+
+  const handlePrevClick = () => {
+    setSlideIndex((prev) => prev - 1);
+    setSlideTransition("transform 500ms ease-in-out");
+
+    if (slideIndex === 1) {
+      moveWithoutTransition(originalArrayLength);
+    }
+  };
+
+  const handleNextClick = () => {
+    setSlideIndex((prev) => prev + 1);
+    setSlideTransition("transform 500ms ease-in-out");
+
+    if (slideIndex === originalArrayLength) {
+      moveWithoutTransition(1);
     }
   };
 
   const handleDotClick = (index) => setSlideIndex(index);
 
+  const sliderRef = useRef();
+  useMainSlider(sliderRef, handlePrevClick, handleNextClick);
+
   return (
     <>
       <SlideContainer>
-        <Arrow direction="left" onClick={() => handleArrowClick("left")}>
+        <Arrow direction="left" onClick={handlePrevClick}>
           <FontAwesomeIcon icon={faChevronLeft} />
         </Arrow>
-        <SlideWrapper slideIndex={slideIndex}>
-          {photos.map((photo) => (
-            <Slide key={photo.id}>
+        <SlideWrapper
+          ref={sliderRef}
+          slideIndex={slideIndex}
+          style={{
+            transform: `translateX(-${slideIndex * 100}%)`,
+            transition: `${slideTransition}`,
+          }}
+        >
+          {newArray.map((photo, index) => (
+            <Slide key={index}>
               <Img
                 src={process.env.PUBLIC_URL + `/assets/img/slider/${photo.img}`}
               />
@@ -38,14 +79,14 @@ function MainSlider() {
             </Slide>
           ))}
         </SlideWrapper>
-        <Arrow direction="right" onClick={() => handleArrowClick("right")}>
+        <Arrow direction="right" onClick={handleNextClick}>
           <FontAwesomeIcon icon={faChevronRight} />
         </Arrow>
         <DotContainer>
           {Array.from({ length: photos.length }).map((dot, index) => (
             <Dot
               key={index}
-              className={slideIndex === index && "selected"}
+              className={slideIndex - 1 === index && "selected"}
               onClick={() => handleDotClick(index)}
             ></Dot>
           ))}
@@ -87,8 +128,6 @@ const Arrow = styled.div`
 const SlideWrapper = styled.div`
   height: 100%;
   display: flex;
-  transition: all 1.5s ease;
-  transform: translateX(${({ slideIndex }) => slideIndex * -100}%);
 `;
 
 const Slide = styled.div`
@@ -151,8 +190,6 @@ const Dot = styled.div`
   background-color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
   &.selected {
-    width: 14px;
-    height: 14px;
     background-color: white;
   }
 `;
