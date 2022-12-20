@@ -6,12 +6,7 @@ ${reset}
 
 @font-face {
   font-family: "digital";
-  src: url("/assets/fonts/LAB_digital.ttf");
-}
-
-@font-face {
-  font-family: "qatar";
-  src: url("/assets/fonts/Frutiger_Regular.otf");
+  src: url("../../public/assets/fonts/LAB_digital.ttf");
 }
 
 *{
