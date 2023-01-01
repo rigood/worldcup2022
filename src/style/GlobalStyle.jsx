@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import digital from "./../fonts/LAB_digital.woff";
 
 const GlobalStyles = createGlobalStyle`
 ${reset}
@@ -7,7 +8,7 @@ ${reset}
 @font-face {
   font-family: "digital";
   font-style: "normal";
-  src: url("./../fonts/LAB_digital.ttf") format('truetype'), url("./../fonts/LAB_digital.woff") format('woff');
+  src: url(${digital}) format('woff');
 }
 
 *{
