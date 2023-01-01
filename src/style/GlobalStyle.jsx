@@ -6,7 +6,8 @@ ${reset}
 
 @font-face {
   font-family: "digital";
-  src: url("../../public/assets/fonts/LAB_digital.ttf");
+  font-style: "normal";
+  src: url("../fonts/LAB_digital.ttf") format('truetype'), url("../fonts/LAB_digital.woff") format('woff');
 }
 
 *{
