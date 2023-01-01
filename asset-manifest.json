@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/worldcup2022/static/css/main.b4bd937b.css",
-    "main.js": "/worldcup2022/static/js/main.a7c092bd.js",
+    "main.js": "/worldcup2022/static/js/main.64c8745a.js",
     "index.html": "/worldcup2022/index.html",
     "static/media/filter.svg": "/worldcup2022/static/media/filter.0ede17748c84190440c77a50fef66111.svg",
     "main.b4bd937b.css.map": "/worldcup2022/static/css/main.b4bd937b.css.map",
-    "main.a7c092bd.js.map": "/worldcup2022/static/js/main.a7c092bd.js.map"
+    "main.64c8745a.js.map": "/worldcup2022/static/js/main.64c8745a.js.map"
   },
   "entrypoints": [
     "static/css/main.b4bd937b.css",
-    "static/js/main.a7c092bd.js"
+    "static/js/main.64c8745a.js"
   ]
 }
