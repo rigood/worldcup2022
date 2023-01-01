@@ -7,7 +7,7 @@ ${reset}
 @font-face {
   font-family: "digital";
   font-style: "normal";
-  src: url("../fonts/LAB_digital.ttf") format('truetype'), url("../fonts/LAB_digital.woff") format('woff');
+  src: url("./../fonts/LAB_digital.ttf") format('truetype'), url("./../fonts/LAB_digital.woff") format('woff');
 }
 
 *{
