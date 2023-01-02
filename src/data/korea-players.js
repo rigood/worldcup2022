@@ -9,7 +9,6 @@ export const KOREA_PLAYERS = [
     weight: 78,
     number: 7,
     isCaptin: true,
-    img: "https://w.namu.la/s/1a40140b91e2ff9631c429e3968ffa65dc8a7ef1f40518c1c9ae814d973443eee4c339f5798b7bba3f422ec3bb9c6a71cfb42f7d116c16ee540ca0f57ae2fd651ce71ad3f8418cad36b94a73709e2dfa1e685fbde8a184eb7b01ff8bd8b500cb",
     instagram: "https://www.instagram.com/hm_son7",
   },
   {
@@ -22,7 +21,6 @@ export const KOREA_PLAYERS = [
     weight: 77,
     number: 11,
     isCaptin: false,
-    img: "https://w.namu.la/s/e395a9283bf9cfac714a6a120fcf330d10577b9ca4509e03b67ccda5268ffce3ded7a56755c572c66b1d87182dd666719226ae66816e499dfd60d971cc4bdfb03d0e04afcd1438b4d81077ce5922a42cd8b4c329c58f8ae82ef8409ecb993282c5394248e49b7ada7658b14b468910e8",
     instagram: "https://www.instagram.com/hwangheechan",
   },
   {
@@ -35,7 +33,6 @@ export const KOREA_PLAYERS = [
     weight: 82,
     number: 9,
     isCaptin: false,
-    img: "https://w.namu.la/s/25ed11d0094cf291c17504d60954ca573a2c16eb76d76cad443d926a1b4bf0a9604b9aff668756ca410717e0b93a3d680deb33ceb318a788f81eb72a5f65b4baf9fa2e7f1b3786de8d23d50b7c4890b4bf072a48a0ecc1bb0e264985c1291792",
     instagram: "https://instagram.com/whrbtjd/",
   },
 ];

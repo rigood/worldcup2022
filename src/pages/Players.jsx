@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { KOREA_PLAYERS } from "../data/korea-players";
 import Title from "../components/Common/Title";
-import Slider from "../components/Common/Slider";
+import Slider from "../components/Player/Slider";
 import PlayerItem from "./../components/Player/PlayerItem";
 
 function Players() {

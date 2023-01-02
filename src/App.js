@@ -11,7 +11,7 @@ import News from "./pages/News";
 import Clips from "./pages/Clips";
 import Photos from "./pages/Photos";
 import MY from "./pages/MY";
-import Footer from "./components/Common/Footer";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [tabIndex, setTabIndex] = useState(1);
