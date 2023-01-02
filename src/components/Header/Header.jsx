@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import useSlider from "../../hook/useSlider";
-import { tabs } from "../../data/tabs";
+import { tabs } from "../../data/tab-items";
 import { desktop, tablet, mobile, fold } from "../../style/responsive";
 import SportsSoccerRoundedIcon from "@mui/icons-material/SportsSoccerRounded";
 
@@ -70,7 +70,7 @@ const Left = styled.div`
 
 const Title = styled.h1`
   font-family: "GhanaChocolate";
-  color: #8a173a;
+  color: ${({ theme }) => theme.color.primary};
   font-size: 32px;
   letter-spacing: -1px;
   cursor: pointer;
@@ -81,12 +81,6 @@ const Title = styled.h1`
 
 const Center = styled.div`
   ${desktop({ order: 1, width: "100%" })}
-`;
-
-const TabContainer = styled.nav`
-  display: flex;
-  ${desktop({ justifyContent: "space-between" })};
-  ${desktop({ overflow: "hidden" })};
 `;
 
 const TabItem = styled.span`
@@ -103,7 +97,7 @@ const TabItem = styled.span`
   user-select: none;
 
   &.selected {
-    color: #8a173a;
+    color: ${({ theme }) => theme.color.primary};
     &::after {
       width: 100%;
     }
@@ -112,7 +106,7 @@ const TabItem = styled.span`
   &::after {
     content: "";
     position: absolute;
-    background-color: #8a173a;
+    background-color: ${({ theme }) => theme.color.primary};
     width: 0%;
     height: 3px;
     left: 0;
@@ -122,7 +116,7 @@ const TabItem = styled.span`
 
   @media (hover: hover) {
     &:hover {
-      color: #8a173a;
+      color: ${({ theme }) => theme.color.primary};
     }
     &:hover::after {
       width: 100%;
@@ -130,6 +124,18 @@ const TabItem = styled.span`
   }
 
   ${mobile({ fontSize: "16px" })}
+`;
+
+const TabContainer = styled.nav`
+  display: flex;
+  ${desktop({ justifyContent: "space-between" })};
+  ${desktop({ overflow: "hidden" })};
+
+  &.dragging {
+    ${TabItem} {
+      pointer-events: none;
+    }
+  }
 `;
 
 const Right = styled.div`

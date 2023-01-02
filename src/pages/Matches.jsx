@@ -7,7 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import Loader from "../components/Common/Loader";
 import { mobile } from "./../style/responsive";
+import ErrorElement from "../components/Common/ErrorElement";
 
+// API 로그인
 const EMAIL = process.env.REACT_APP_WORLDCUP_EMAIL;
 const PASSWORD = process.env.REACT_APP_WORLDCUP_PASSWORD;
 
@@ -17,10 +19,8 @@ const loginInfo = `{
     }`;
 
 function Matches() {
+  // Match Day 탭 관련
   const [dayIndex, setDayIndex] = useState(1);
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const dayRef = useRef([]);
 
   const handleDayTabClick = (index) => {
@@ -34,38 +34,53 @@ function Matches() {
     }
   };
 
+  // fetch 관련 state 선언
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Match 정보 API 호출
   useEffect(() => {
     setIsLoading(true);
+
     const fetchTokenAndData = async () => {
       try {
-        const response = await fetch("/api/v1/user/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: loginInfo,
-        });
+        const response = await fetch(
+          "http://api.cup2022.ir/api/v1/user/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: loginInfo,
+          }
+        );
 
         if (!response.ok) {
-          throw new Error(`${response.status} Error`);
+          throw new Error(
+            response.status ? `${response.status} 에러 발생` : "에러 발생"
+          );
         }
 
         const results = await response.json();
         const token = await results.data.token;
 
-        const matchesResponse = await fetch("/api/v1/match", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const matchesResponse = await fetch(
+          "http://api.cup2022.ir/api/v1/user/login/api/v1/match",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         const matchesResults = await matchesResponse.json();
         const matchesData = matchesResults.data;
 
         setData(matchesData);
       } catch (err) {
-        setError(err.message || "Server Error");
+        setError(err.message);
       } finally {
         setIsLoading(false);
       }
@@ -74,12 +89,14 @@ function Matches() {
     fetchTokenAndData();
   }, []);
 
+  // Intersection Observer API를 이용하여 스크롤에 따라 Match Day 탭 활성화
   const observer = useRef([]);
-  useEffect(() => {
-    const dayRefArray = MATCH_DAYS.map((day) => dayRef.current[day.id]);
-    console.log(dayRefArray);
 
+  useEffect(() => {
     if (isLoading) return;
+    if (error) return;
+
+    const dayRefArray = MATCH_DAYS.map((day) => dayRef.current[day.id]);
 
     dayRefArray.forEach((dayRef, index) => {
       if (observer.current[index + 1]) {
@@ -91,7 +108,6 @@ function Matches() {
       observer.current[index + 1] = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting) {
-            console.log(index + 1, "교차했음", entries[0].target.id);
             const id = parseInt(entries[0].target.id);
             setDayIndex(id);
           }
@@ -107,7 +123,6 @@ function Matches() {
 
     dayRefArray.forEach((dayRef, index) => {
       observer.current[index + 1].observe(dayRef);
-      console.log("observer등록", dayRef);
     });
 
     return () => {
@@ -115,9 +130,11 @@ function Matches() {
         observer.current[index + 1].disconnect();
       });
     };
-  }, [isLoading]);
+  }, [isLoading, error]);
 
+  // 로딩, 에러 상태 표시
   if (isLoading) return <Loader msg="경기 정보를 불러오는 중입니다." />;
+  if (error) return <ErrorElement msg={error} />;
 
   return (
     <>

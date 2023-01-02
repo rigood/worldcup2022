@@ -59,11 +59,15 @@ function useSlider(sliderContainerRef) {
 
 export default useSlider;
 
-// 1. sliderContainer에 ref 달아주기
-// 2. sliderContainer CSS 속성
-// overflow: hidden;
-// 버튼으로 이동 시 smooth, 드래그 시 auto
+// * sliderContainer에 ref 달아주기
+
+// * sliderContainer에 CSS 속성 적용
+
+// 1. overflow: hidden;
+
+// 2. 버튼으로 이동 시 smooth, 드래그 시 auto
 // scroll-behavior: smooth;
 // &.dragging {scroll-behavior: auto;}
-// 슬라이더 이동 시 하위항목 클릭 방지
+
+// 3. 슬라이더 이동 시 하위항목 클릭 방지
 // &.dragging ${하위항목} {pointer-events: none;}

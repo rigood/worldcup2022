@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { formatDate } from "../../utils/format";
+import { formatDate } from "./../../utils/formatDate";
 
 const DEFAULT_IMG = "https://via.placeholder.com/100x66?text=WorldCup";
 

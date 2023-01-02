@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import MainSlider from "./../Common/MainSlider";
+import MainSlider from "./MainSlider";
 import { mobile } from "./../../style/responsive";
 
 function Hero() {

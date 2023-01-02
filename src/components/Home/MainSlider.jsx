@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { mobile } from "./../../style/responsive";
-import { photos } from "../../data/photos";
+import { mobile } from "../../style/responsive";
+import { photos } from "../../data/mainslider-photos";
 import {
   faChevronLeft,
   faChevronRight,
@@ -17,15 +17,18 @@ function getNewArray(arr) {
 }
 
 function MainSlider() {
-  const [slideIndex, setSlideIndex] = useState(1);
+  const originalArrayLength = photos.length;
+  const originalArrayStartIdx = 1;
+  const originalArrayEndIdx = originalArrayLength;
+
+  const newArray = getNewArray(photos);
+
+  const [slideIndex, setSlideIndex] = useState(originalArrayStartIdx);
   const [slideTransition, setSlideTransition] = useState(
     "transform 500ms ease-in-out"
   );
 
-  const originalArrayLength = photos.length;
-  const newArray = getNewArray(photos);
-
-  const moveWithoutTransition = (index) => {
+  const moveToSlideWithoutTransition = (index) => {
     setTimeout(() => {
       setSlideIndex(index);
       setSlideTransition("");
@@ -36,8 +39,8 @@ function MainSlider() {
     setSlideIndex((prev) => prev - 1);
     setSlideTransition("transform 500ms ease-in-out");
 
-    if (slideIndex === 1) {
-      moveWithoutTransition(originalArrayLength);
+    if (slideIndex === originalArrayStartIdx) {
+      moveToSlideWithoutTransition(originalArrayEndIdx);
     }
   };
 
@@ -45,12 +48,15 @@ function MainSlider() {
     setSlideIndex((prev) => prev + 1);
     setSlideTransition("transform 500ms ease-in-out");
 
-    if (slideIndex === originalArrayLength) {
-      moveWithoutTransition(1);
+    if (slideIndex === originalArrayEndIdx) {
+      moveToSlideWithoutTransition(originalArrayStartIdx);
     }
   };
 
-  const handleDotClick = (index) => setSlideIndex(index);
+  const handleDotClick = (index) => {
+    setSlideIndex(index);
+    setSlideTransition("transform 500ms ease-in-out");
+  };
 
   // 마우스, 터치 이벤트 적용
   const startX = useRef(null);
@@ -70,7 +76,8 @@ function MainSlider() {
     }
   };
 
-  // 커스텀훅 사용할 경우, 리렌더링 되면서 slideIndex가 1로 초기화됨
+  // useMainSlider 커스텀훅을 사용할 경우
+  // 리렌더링 되면서 slideIndex가 1로 초기화되는 문제가 발생하여 무한슬라이드 적용 불가 -> 주석처리
   // const sliderRef = useRef();
   // useMainSlider(sliderRef, handlePrevClick, handleNextClick);
 
@@ -106,11 +113,11 @@ function MainSlider() {
           <FontAwesomeIcon icon={faChevronRight} />
         </Arrow>
         <DotContainer>
-          {Array.from({ length: photos.length }).map((dot, index) => (
+          {photos.map((dot, index) => (
             <Dot
               key={index}
-              className={slideIndex - 1 === index && "selected"}
-              onClick={() => handleDotClick(index)}
+              className={index === slideIndex - 1 && "selected"}
+              onClick={() => handleDotClick(index + 1)}
             ></Dot>
           ))}
         </DotContainer>

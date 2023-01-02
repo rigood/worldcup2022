@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as FilterIcon } from "../../svg/filter.svg";
-import { formatFilterName } from "../../utils/format";
+import { formatFilterName } from "./../../utils/formatFilterName";
 
 function NewsFilter({ articles, filter, setFilter }) {
   const [modalOpen, setModalOpen] = useState(false);

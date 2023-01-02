@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import styled from "styled-components";
 import { translateIntoKorean } from "../../utils/translateIntoKorean";
-import { formatDate } from "../../utils/format";
+import { formatDate } from "./../../utils/formatDate";
 
 function PhotoItem({ photo }, ref) {
   const {
