@@ -31,7 +31,7 @@ function DayMatchItem({ match }) {
     <Wrapper>
       <TopRow>
         <div className="team-box home">
-          <img src={match.home_flag} />
+          <img src={match.home_flag} alt="flag" />
           <div className="country">{match.home_team_en}</div>
         </div>
 
@@ -55,7 +55,7 @@ function DayMatchItem({ match }) {
         </div>
 
         <div className="team-box away">
-          <img src={match.away_flag} />
+          <img src={match.away_flag} alt="flag" />
           <div className="country">{match.away_team_en}</div>
         </div>
       </TopRow>

@@ -4,27 +4,28 @@ import { getIconUrl } from "../../utils/getIconUrl";
 function WeatherItem(props) {
   const { koName, enName, data } = props;
 
+  if (!data?.weather) return;
+
   return (
     <Wrapper>
       <div className="country">
         <img
           src={process.env.PUBLIC_URL + `/assets/img/flag/${enName}-flag.png`}
+          alt={`${koName} 국기`}
         />
         <span className="name">{koName}</span>
       </div>
 
-      <img src={getIconUrl(data?.weather?.[0]?.icon)} />
+      <img src={getIconUrl(data.weather[0].icon)} alt="weather" />
 
-      {data?.main?.temp ? (
-        <div className="temp">
-          <div className="current">{data?.main?.temp?.toFixed(1)}°</div>
-          <div className="minmax">
-            <span className="min">{data?.main?.temp_min?.toFixed()}°</span>
-            <span className="line">/</span>
-            <span className="max">{data?.main?.temp_max?.toFixed()}°</span>
-          </div>
+      <div className="temp">
+        <div className="current">{data.main.temp.toFixed(1)}°</div>
+        <div className="minmax">
+          <span className="min">{data.main.temp_min.toFixed()}°</span>
+          <span className="line">/</span>
+          <span className="max">{data.main.temp_max.toFixed()}°</span>
         </div>
-      ) : null}
+      </div>
     </Wrapper>
   );
 }

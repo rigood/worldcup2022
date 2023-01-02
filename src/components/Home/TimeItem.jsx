@@ -8,6 +8,7 @@ function TimeItem(props) {
       <div className="country">
         <img
           src={process.env.PUBLIC_URL + `/assets/img/flag/${enName}-flag.png`}
+          alt={`${koName} 국기`}
         />
         <span className="name">{koName}</span>
       </div>
