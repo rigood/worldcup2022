@@ -23,6 +23,7 @@
 - 탭 메뉴 및 콘텐츠에 `슬라이더` 도입
 
   ![slider](./docs/img/slider.gif)
+  ![slider2](./docs/img/slider2.gif)
 
 <br>
 
