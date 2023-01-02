@@ -6,7 +6,9 @@ function TimeItem(props) {
   return (
     <Wrapper>
       <div className="country">
-        <img src={process.env.PUBLIC_URL + `/assets/${enName}-flag.png`} />
+        <img
+          src={process.env.PUBLIC_URL + `/assets/img/flag/${enName}-flag.png`}
+        />
         <span className="name">{koName}</span>
       </div>
       <div className="datetime">
